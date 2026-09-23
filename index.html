@@ -551,6 +551,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="dock">Garantir vaga</a>
 </div>
 
+<!-- WhatsApp flutuante: o balão aparece 7s depois de entrar e alterna
+     mensagens. Fica DEPOIS do .dock de propósito: o CSS usa
+     `.dock.is-on ~ .wa` para subir o botão quando a barra do mobile aparece. -->
+<div class="wa" id="wa">
+  <div class="wa__bubble" id="waBubble" hidden>
+    <button class="wa__bubble-x" type="button" id="waBubbleX" aria-label="Fechar mensagem">&times;</button>
+    <a class="wa__bubble-body" data-wa-link href="https://wa.me/5581973105354" target="_blank" rel="noopener">
+      <span class="wa__bubble-who"><i></i> Time CPPEM · online</span>
+      <span class="wa__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="wa__bubble-msg" id="waMsg" aria-live="polite"></span>
+    </a>
+  </div>
+  <a class="wa__btn" data-wa-link href="https://wa.me/5581973105354" target="_blank" rel="noopener" aria-label="Tirar dúvidas no WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1s-.5-.1-.7.2-.8 1-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5.3-.5v-.5L9 6.9c-.2-.5-.4-.4-.5-.4h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 6 9.3c0 1.5 1.1 3 1.3 3.2a12 12 0 0 0 4.6 4c.6.3 1.1.5 1.5.6.7.2 1.3.2 1.7.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4zM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/></svg>
+    <span class="wa__badge" id="waBadge" hidden>1</span>
+  </a>
+</div>
+
+<!-- EXIT POPUP: sai pelo topo no desktop, arremesso de volta ao topo ou
+     inatividade no mobile. Regras de quando pode aparecer: script.js. -->
+<div class="xp" id="xp" hidden>
+  <div class="xp__overlay" data-xp-close></div>
+  <div class="xp__box" role="dialog" aria-modal="true" aria-labelledby="xpTitle" aria-describedby="xpLead">
+    <div class="xp__inner">
+      <button class="xp__close" type="button" data-xp-close aria-label="Fechar">&times;</button>
+
+      <p class="xp__alert"><span class="pulse"></span> Espera aí</p>
+      <h2 class="xp__title" id="xpTitle">Não desista <em>da sua vaga.</em></h2>
+      <p class="xp__lead" id="xpLead">
+        A redação é a prova que elimina quem gabaritou a objetiva. Essa turma
+        tem <strong>só 25 cadeiras</strong>, com cada texto corrigido pela
+        própria Prof.ª Shayenne. Quando fechar, fechou.
+      </p>
+
+      <div class="seats seats--xp" aria-label="Turma limitada a 25 alunos">
+        <div class="seats__grid" data-seats></div>
+        <p class="seats__label" data-vagas-texto>Apenas <b>25 cadeiras</b>. Fechou, fechou.</p>
+      </div>
+
+      <ul class="xp__facts">
+        <li><b>8</b> encontros ao vivo</li>
+        <li><b>8</b> correções</li>
+        <li>Início <b>03/10</b></li>
+      </ul>
+
+      <a class="btn btn--xl btn--block js-checkout xp__cta" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="exit-popup">
+        Garantir minha vaga agora
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+      <p class="xp__price">12x de <b>R$ 29,20</b> · ou R$ 279,90 à vista</p>
+      <button class="xp__skip" type="button" data-xp-close data-xp-decline>Não, prefiro deixar a redação para depois</button>
+    </div>
+  </div>
+</div>
+
 <script src="script.js" defer></script>
 </body>
 </html>
