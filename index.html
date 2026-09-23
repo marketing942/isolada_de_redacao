@@ -19,7 +19,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0A0A0B">
 
-<title>Isolada de Redação com a Prof.ª Shayenne — Cebraspe e AOCP | CPPEM Concursos</title>
+<title>Isolada de Redação</title>
 <meta name="description" content="8 encontros ao vivo aos sábados, das 15h30 às 17h, de 03/10 a 21/11. 8 temas e 8 redações corrigidas pela própria Prof.ª Shayenne. Redação das principais bancas de carreiras policiais, com foco em Cebraspe e AOCP. Turma única com 25 vagas.">
 
 <link rel="icon" href="public/favicon.ico" sizes="48x48">
@@ -37,6 +37,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="public/banner-shayenne.webp" media="(min-width: 701px)" fetchpriority="high">
+<link rel="preload" as="image" href="public/banner-shayenne-mobile.webp" media="(max-width: 700px)" fetchpriority="high">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -69,6 +71,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ─── HERO ───────────────────────────────────────────── -->
 <section class="hero" id="hero">
   <div class="hero__bg" id="heroBg" aria-hidden="true">
+    <!-- Banner da Shayenne: surge durante a passagem em câmera lenta e
+         escurece depois do choque para o texto ficar legível. -->
+    <picture class="hero__photo">
+      <source media="(max-width: 700px)" srcset="public/banner-shayenne-mobile.webp">
+      <img src="public/banner-shayenne.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero__shade"></div>
     <div class="hero__grid"></div>
     <div class="hero__glow"></div>
   </div>
@@ -94,22 +103,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <p class="hero__com">com a <em>Prof.ª Shayenne</em></p>
 
-    <p class="hero__lead">
-      8 encontros ao vivo, um por sábado. Toda semana um tema novo, e a sua
-      redação volta <strong>corrigida pela própria professora</strong> antes do
-      encontro seguinte. Redação das principais bancas de carreiras policiais,
-      com foco em <strong>Cebraspe</strong> e <strong>AOCP</strong>.
-    </p>
-
-    <ul class="chips">
-      <li><b>8</b> encontros ao vivo</li>
-      <li>Sábados · 15h30 às 17h</li>
-      <li><b>8</b> correções</li>
-      <li>Aulas gravadas</li>
-    </ul>
-
     <div class="hero__cta">
-      <a class="btn btn--xl js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="hero">
+      <a class="btn btn--xl btn--ivory js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="hero">
         Quero minha vaga
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
       </a>
@@ -288,10 +283,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="section section--alt" id="professora">
   <div class="wrap prof">
     <figure class="prof__foto reveal">
-      <!-- FOTO PRINCIPAL: salvar em public/shayenne.webp (retrato 4:5,
-           ~800x1000). Enquanto o arquivo não existir, fica o monograma. -->
+      <!-- FOTO PRINCIPAL: public/shayenne.webp, gerada de public/fotoshay.png.
+           Se o arquivo sumir, fica o monograma. -->
       <span class="prof__mono" aria-hidden="true">S</span>
-      <img src="public/shayenne.webp" alt="Prof.ª Shayenne" width="800" height="1000" loading="lazy" onerror="this.remove()">
+      <img src="public/shayenne.webp" alt="Prof.ª Shayenne" width="632" height="716" loading="lazy" onerror="this.remove()">
       <span class="prof__corner prof__corner--tl"></span>
       <span class="prof__corner prof__corner--br"></span>
       <figcaption class="prof__badge"><b>8</b><span>aprovações em<br>concursos públicos</span></figcaption>
@@ -439,7 +434,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </details>
       <details class="reveal">
         <summary>Posso parcelar?</summary>
-        <p>Sim: em até 12x de R$ 27,11, ou R$ 259,90 à vista.</p>
+        <p>Sim: em até 12x de R$ 27,12, ou R$ 259,90 à vista.</p>
       </details>
       <details class="reveal">
         <summary>O que acontece quando as 25 vagas acabarem?</summary>
@@ -458,7 +453,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       Quero minha vaga
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
     </a>
-    <p class="final__price">12x de R$ 27,11 · ou R$ 259,90 à vista</p>
+    <p class="final__price">12x de R$ 27,12 · ou R$ 259,90 à vista</p>
   </div>
 </section>
 
@@ -547,7 +542,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- Barra fixa do mobile: só aparece depois da hero -->
 <div class="dock" id="dock">
-  <div class="dock__txt"><b>12x R$ 27,11</b><small data-vagas-curto>Turma única · 25 vagas</small></div>
+  <div class="dock__txt"><b>12x R$ 27,12</b><small data-vagas-curto>Turma única · 25 vagas</small></div>
   <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="dock">Garantir vaga</a>
 </div>
 
@@ -600,7 +595,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         Garantir minha vaga agora
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
       </a>
-      <p class="xp__price">12x de <b>R$ 27,11</b> · ou R$ 259,90 à vista</p>
+      <p class="xp__price">12x de <b>R$ 27,12</b> · ou R$ 259,90 à vista</p>
       <button class="xp__skip" type="button" data-xp-close data-xp-decline>Não, prefiro deixar a redação para depois</button>
     </div>
   </div>

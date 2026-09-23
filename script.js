@@ -114,7 +114,7 @@
     x.fillRect(0, 0, 64, 64);
     return c;
   }
-  var SPRITES = [makeGlow(255, 150, 70), makeGlow(255, 190, 110), makeGlow(214, 100, 45)];
+  var SPRITES = [makeGlow(255, 96, 60), makeGlow(255, 160, 110), makeGlow(200, 45, 30)];
 
   if (embersCanvas && !reduced) {
     var ec = embersCanvas.getContext("2d");
@@ -245,7 +245,7 @@
         vy: Math.sin(ang) * spd * 0.75 - 1.5,
         life: 0,
         max: 35 + Math.random() * 55,
-        hue: 22 + Math.random() * 26,
+        hue: 4 + Math.random() * 30,
         wd: 0.8 + Math.random() * 2
       });
     }
@@ -278,15 +278,58 @@
     requestAnimationFrame(loop);
   }
 
+  /* Posição de partida de cada palavra: na vertical, encostada na sua
+     lateral da tela. O transform gira em volta do transform-origin (pé do
+     ISOLADA, topo do REDAÇÃO), então o centro visual depois do giro não é o
+     centro da caixa — as contas abaixo compensam isso. */
+  function posicionar() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    var nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 84;
+    var meio = nav + (vh - nav) / 2;
+    var margem = Math.max(12, vw * 0.035);
+    [[".collide__w--l", 1], [".collide__w--r", -1]].forEach(function (par) {
+      var el = collide.querySelector(par[0]);
+      var lado = par[1];
+      el.style.transform = "none";
+      var r = el.getBoundingClientRect();
+      el.style.transform = "";
+      var w = r.width, h = r.height;
+      var cx = r.left + w / 2, cy = r.top + h / 2;
+      // Na vertical a palavra pode crescer: no celular o título horizontal é
+      // pequeno, mas de pé ela tem a altura da tela para ocupar (~60%).
+      var big = Math.max(1, Math.min(1.8, (vh * 0.6) / w));
+      // centro visual depois de escalar e girar 90° em volta da origem
+      var rcx = cx - big * h / 2;
+      var rcy = lado === 1 ? cy + h / 2 : cy - h / 2;
+      var tx = lado === 1 ? margem + big * h / 2 : vw - margem - big * h / 2;
+      el.style.setProperty("--big", big.toFixed(3));
+      var curso = Math.min(vh * 0.12, 110);          // quanto anda na câmera lenta
+      var comp = w * big;                               // comprimento da palavra em pé
+      // Começa inteira fora da tela: ISOLADA abaixo do rodapé da janela,
+      // REDAÇÃO acima do topo. Entra rápido e freia no meio.
+      var yS = lado === 1 ? vh + comp / 2 + 20 : -comp / 2 - 20;
+      var y0 = meio + lado * curso / 2;                 // ISOLADA segue subindo devagar
+      var y1 = meio - lado * curso / 2;                 // REDAÇÃO segue descendo devagar
+      el.style.setProperty("--dx", (tx - rcx).toFixed(1) + "px");
+      el.style.setProperty("--dyS", (yS - rcy).toFixed(1) + "px");
+      el.style.setProperty("--dy0", (y0 - rcy).toFixed(1) + "px");
+      el.style.setProperty("--dy1", (y1 - rcy).toFixed(1) + "px");
+    });
+  }
+
   if (hero && seam) {
     var cs = getComputedStyle(document.documentElement);
-    var delay = parseFloat(cs.getPropertyValue("--slam-delay")) * 1000 || 350;
-    var dur = parseFloat(cs.getPropertyValue("--slam-dur")) * 1000 || 1300;
-    var IMPACTO = delay + dur * 0.7;
+    var delay = parseFloat(cs.getPropertyValue("--slam-delay")) * 1000 || 250;
+    var dur = parseFloat(cs.getPropertyValue("--slam-dur")) * 1000 || 3600;
+    var IMPACTO = delay + dur * 0.88;
 
-    if (reduced) {
-      hero.classList.add("is-fused");
-    } else {
+    var comecar = function () {
+      if (hero.classList.contains("is-intro")) return;
+      if (reduced) { hero.classList.add("is-intro", "is-fused"); return; }
+      fit();
+      posicionar();
+      hero.classList.add("is-intro");
+
       setTimeout(function () {
         var p = centro();
         hero.style.setProperty("--cx", p.x + "px");
@@ -297,8 +340,21 @@
       }, IMPACTO);
 
       setTimeout(function () { hero.classList.add("is-fused"); }, IMPACTO + 600);
+    };
+
+    // Espera a fonte (as medidas dependem dela) e o banner, com teto de 1,2s
+    // para a entrada nunca travar por conexão lenta.
+    var prontos = [];
+    if (document.fonts && document.fonts.ready) prontos.push(document.fonts.ready);
+    var foto = hero.querySelector(".hero__photo img");
+    if (foto && !foto.complete) prontos.push(new Promise(function (ok) { foto.addEventListener("load", ok); foto.addEventListener("error", ok); }));
+    if (window.Promise && prontos.length) {
+      Promise.race([Promise.all(prontos), new Promise(function (ok) { setTimeout(ok, 1200); })]).then(comecar);
+    } else {
+      comecar();
     }
   }
+
 
   /* =========================================================
      SCROLL — header, barra de progresso, parallax, dock
