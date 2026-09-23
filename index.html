@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <!-- Google Tag Manager (mesmo container das demais landings do CPPEM).
+       Precisa ser o primeiro script do <head>. -->
+  <script>(function(w,d,s,l){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'?l='+l:'';j.async=true;j.src=
+  'https://sgtm.cppem.com.br/metrics/'+dl;f.parentNode.insertBefore(j,f);})
+  (window,document,'script','dataLayer');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- Marca que o JS está vivo: só assim o restante da hero espera o choque
+       para aparecer. Sem JS, tudo fica visível desde o início. -->
+  <script>document.documentElement.classList.add('js')</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0A0A0B">
+
+<title>Isolada de Redação com a Prof.ª Shayenne — Cebraspe e AOCP | CPPEM Concursos</title>
+<meta name="description" content="8 encontros ao vivo aos sábados, das 15h30 às 17h, de 03/10 a 21/11. 8 temas e 8 redações corrigidas pela própria Prof.ª Shayenne. Redação das principais bancas de carreiras policiais, com foco em Cebraspe e AOCP. Turma única com 25 vagas.">
+
+<link rel="icon" href="public/favicon.ico" sizes="48x48">
+<link rel="icon" href="public/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="public/favicon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="public/favicon-192.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CPPEM Concursos Públicos">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Isolada de Redação com a Prof.ª Shayenne — só 25 vagas">
+<meta property="og:description" content="8 sábados ao vivo, das 15h30 às 17h, de 03/10 a 21/11. 8 temas, 8 correções pela própria professora. Foco em Cebraspe e AOCP.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://sgtm.cppem.com.br/ns.html?id=GTM-PJ379FLQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- Brasas: um canvas fixo cobrindo a viewport, acima do conteúdo e sem
+     capturar clique. -->
+<canvas class="embers" id="embers" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ─── HEADER ─────────────────────────────────────────── -->
+<header class="header" id="header">
+  <div class="wrap header__in">
+    <a class="brand brand--logo" href="#topo" aria-label="CPPEM Concursos — voltar ao topo">
+      <img src="public/logo-cppem.png" alt="CPPEM Concursos Públicos" width="700" height="239">
+    </a>
+    <div class="header__vagas" aria-hidden="true">
+      <span class="pulse"></span><span data-vagas-curto>Turma única · 25 vagas</span>
+    </div>
+    <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="header">Garantir vaga</a>
+  </div>
+</header>
+
+<main id="topo">
+
+<!-- ─── HERO ───────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero__bg" id="heroBg" aria-hidden="true">
+    <div class="hero__grid"></div>
+    <div class="hero__glow"></div>
+  </div>
+
+  <!-- Palco do choque: clarão, anéis de onda e as faíscas (canvas próprio) -->
+  <div class="impact" aria-hidden="true">
+    <canvas class="impact__sparks" id="sparks"></canvas>
+    <span class="impact__flash"></span>
+    <span class="impact__flare"></span>
+    <span class="impact__ring"></span>
+    <span class="impact__ring impact__ring--2"></span>
+    <span class="impact__ring impact__ring--3"></span>
+  </div>
+
+  <div class="wrap hero__in">
+    <h1 class="collide" id="collide" aria-label="Isolada de Redação">
+      <span class="collide__row" aria-hidden="true">
+        <span class="collide__top"><span class="collide__w collide__w--l" data-text="ISOLADA">ISOLADA</span><span class="collide__de">DE</span></span>
+        <span class="collide__mid"></span>
+        <span class="collide__w collide__w--r" data-text="REDAÇÃO">REDAÇÃO</span>
+      </span>
+    </h1>
+
+    <p class="hero__com">com a <em>Prof.ª Shayenne</em></p>
+
+    <p class="hero__lead">
+      8 encontros ao vivo, um por sábado. Toda semana um tema novo, e a sua
+      redação volta <strong>corrigida pela própria professora</strong> antes do
+      encontro seguinte. Redação das principais bancas de carreiras policiais,
+      com foco em <strong>Cebraspe</strong> e <strong>AOCP</strong>.
+    </p>
+
+    <ul class="chips">
+      <li><b>8</b> encontros ao vivo</li>
+      <li>Sábados · 15h30 às 17h</li>
+      <li><b>8</b> correções</li>
+      <li>Aulas gravadas</li>
+    </ul>
+
+    <div class="hero__cta">
+      <a class="btn btn--xl js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="hero">
+        Quero minha vaga
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#problema" aria-label="Rolar para baixo"><span></span></a>
+</section>
+
+<!-- ─── FAIXA ──────────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Cebraspe</span><i>✦</i><span>AOCP</span><i>✦</i><span>25 vagas</span><i>✦</i><span>Sábados 15h30</span><i>✦</i><span>Correção individual</span><i>✦</i><span>Início 03/10</span><i>✦</i>
+    <span>Cebraspe</span><i>✦</i><span>AOCP</span><i>✦</i><span>25 vagas</span><i>✦</i><span>Sábados 15h30</span><i>✦</i><span>Correção individual</span><i>✦</i><span>Início 03/10</span><i>✦</i>
+  </div>
+</div>
+
+<!-- ─── PROBLEMA ───────────────────────────────────────── -->
+<section class="section" id="problema">
+  <div class="wrap split">
+    <div class="reveal">
+      <p class="eyebrow">A prova que ninguém treina</p>
+      <h2 class="h2">Você acerta a objetiva.<br><em>A redação decide.</em></h2>
+    </div>
+    <div class="reveal prose">
+      <p>
+        Na maioria dos concursos, a discursiva é <strong>eliminatória</strong>, e
+        é nela que muita vaga escapa de quem estudou meses para as objetivas.
+        Não por falta de conteúdo, mas por falta de treino no formato que a
+        banca corrige.
+      </p>
+      <p>
+        Ler modelo pronto não resolve. O que resolve é <strong>escrever toda
+        semana, receber a correção e reescrever</strong>, com alguém que já
+        passou por essa prova dizendo exatamente onde você perde ponto.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COMO FUNCIONA ──────────────────────────────────── -->
+<section class="section section--alt" id="como">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow">Como funciona</p>
+      <h2 class="h2">Um ciclo por semana. <em>Oito vezes.</em></h2>
+      <p class="sec-head__sub">Cada sábado abre um ciclo que só fecha quando a sua redação volta corrigida.</p>
+    </header>
+
+    <ol class="cycle">
+      <li class="cycle__step reveal">
+        <span class="cycle__n">01</span>
+        <h3>Sábado, ao vivo</h3>
+        <p>Das 15h30 às 17h, com a Prof.ª Shayenne: estrutura, argumentação e o que a banca espera ler.</p>
+      </li>
+      <li class="cycle__step reveal">
+        <span class="cycle__n">02</span>
+        <h3>Tema da semana</h3>
+        <p>Você sai de cada encontro com uma proposta de redação no estilo da banca para escrever.</p>
+      </li>
+      <li class="cycle__step cycle__step--prazo reveal">
+        <span class="cycle__n">03</span>
+        <h3>Entrega até terça</h3>
+        <p>A redação vai até a terça-feira seguinte ao encontro. <strong>Depois disso, não é corrigida.</strong></p>
+      </li>
+      <li class="cycle__step reveal">
+        <span class="cycle__n">04</span>
+        <h3>Correção da professora</h3>
+        <p>A própria Shayenne corrige o seu texto antes do próximo sábado. Nada de correção terceirizada.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ─── BENEFÍCIOS ─────────────────────────────────────── -->
+<section class="section" id="beneficios">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow">O que está incluído</p>
+      <h2 class="h2">Oito de cada. <em>E mais um time inteiro.</em></h2>
+    </header>
+
+    <div class="trio">
+      <article class="trio__item reveal">
+        <b class="trio__n">8</b>
+        <h3>Encontros ao vivo</h3>
+        <p>Todos ficam salvos na plataforma para você rever quando quiser.</p>
+      </article>
+      <article class="trio__item reveal">
+        <b class="trio__n">8</b>
+        <h3>Temas de redação</h3>
+        <p>Uma proposta nova a cada encontro, no formato da banca.</p>
+      </article>
+      <article class="trio__item reveal">
+        <b class="trio__n">8</b>
+        <h3>Correções individuais</h3>
+        <p>Feitas pela própria Prof.ª Shayenne, com devolutiva no seu texto.</p>
+      </article>
+    </div>
+
+    <ul class="extras">
+      <li class="reveal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="1"/><path d="M10 9l4 2-4 2z"/><path d="M8 21h8"/></svg>
+        <div><h3>Aulas gravadas de redação</h3><p>Acesso às aulas de redação da plataforma CPPEM para reforçar o conteúdo entre um sábado e outro.</p></div>
+      </li>
+      <li class="reveal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+        <div><h3>Grupo VIP da turma</h3><p>Um grupo com os outros alunos para tirar dúvidas e manter o ritmo de escrita.</p></div>
+      </li>
+      <li class="reveal">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><h3>Apoio pedagógico</h3><p>O time pedagógico do CPPEM acompanha você durante todo o processo.</p></div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─── BANCAS ─────────────────────────────────────────── -->
+<section class="section section--alt" id="bancas">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow">Foco de banca</p>
+      <h2 class="h2">Duas bancas. <em>Dois jeitos de corrigir.</em></h2>
+      <p class="sec-head__sub">Os encontros cobrem a redação das principais bancas de carreiras policiais, com atenção especial às duas que mais aparecem nos editais.</p>
+    </header>
+
+    <div class="bancas">
+      <article class="banca reveal">
+        <span class="banca__tag">Banca</span>
+        <h3 class="banca__nome">Cebraspe</h3>
+        <ul class="checks">
+          <li>Texto dissertativo com tema e tópicos definidos: cada tópico precisa aparecer</li>
+          <li>Erros de língua descontam da nota de conteúdo</li>
+          <li>Limite de linhas curto: cada frase tem de trabalhar</li>
+          <li>Treino de planejamento para não fugir do comando</li>
+        </ul>
+      </article>
+      <article class="banca reveal">
+        <span class="banca__tag">Banca</span>
+        <h3 class="banca__nome">AOCP</h3>
+        <ul class="checks">
+          <li>Texto dissertativo-argumentativo com tese clara</li>
+          <li>Estrutura, coesão e progressão de ideias avaliadas</li>
+          <li>Repertório e argumentação consistentes</li>
+          <li>Domínio da norma-padrão do começo ao fim</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CRONOGRAMA ─────────────────────────────────────── -->
+<section class="section" id="cronograma">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow">Cronograma</p>
+      <h2 class="h2">8 sábados. <em>De 03/10 a 21/11.</em></h2>
+      <p class="sec-head__sub">Sempre das <strong>15h30 às 17h</strong> (horário de Brasília), ao vivo.</p>
+    </header>
+
+    <ol class="timeline" id="timeline">
+      <li class="reveal"><span class="timeline__n">01</span><b>03/10</b><small>Abertura</small></li>
+      <li class="reveal"><span class="timeline__n">02</span><b>10/10</b><small>15h30</small></li>
+      <li class="reveal"><span class="timeline__n">03</span><b>17/10</b><small>15h30</small></li>
+      <li class="reveal"><span class="timeline__n">04</span><b>24/10</b><small>15h30</small></li>
+      <li class="reveal"><span class="timeline__n">05</span><b>31/10</b><small>15h30</small></li>
+      <li class="reveal"><span class="timeline__n">06</span><b>07/11</b><small>15h30</small></li>
+      <li class="reveal"><span class="timeline__n">07</span><b>14/11</b><small>15h30</small></li>
+      <li class="reveal"><span class="timeline__n">08</span><b>21/11</b><small>Encerramento</small></li>
+    </ol>
+    <p class="timeline__note reveal">Perdeu um sábado? O encontro fica salvo na plataforma. Você assiste, pega o tema e entrega até terça, como todo mundo.</p>
+  </div>
+</section>
+
+<!-- ─── PROFESSORA ─────────────────────────────────────── -->
+<section class="section section--alt" id="professora">
+  <div class="wrap prof">
+    <figure class="prof__foto reveal">
+      <!-- FOTO PRINCIPAL: salvar em public/shayenne.webp (retrato 4:5,
+           ~800x1000). Enquanto o arquivo não existir, fica o monograma. -->
+      <span class="prof__mono" aria-hidden="true">S</span>
+      <img src="public/shayenne.webp" alt="Prof.ª Shayenne" width="800" height="1000" loading="lazy" onerror="this.remove()">
+      <span class="prof__corner prof__corner--tl"></span>
+      <span class="prof__corner prof__corner--br"></span>
+      <figcaption class="prof__badge"><b>8</b><span>aprovações em<br>concursos públicos</span></figcaption>
+    </figure>
+    <div class="prof__txt reveal">
+      <p class="eyebrow">Quem corrige a sua redação</p>
+      <h2 class="h2">Prof.ª <em>Shayenne</em></h2>
+      <p class="prose">
+        Aprovada em <strong>8 concursos públicos</strong>, Shayenne sabe por
+        experiência própria o que é sentar diante da folha de redação com a
+        vaga em jogo. É esse olhar de quem passou que ela leva para cada
+        correção: o que a banca valoriza, o que ela desconta e o que separa o
+        texto mediano do texto aprovado.
+      </p>
+
+      <ul class="aprov">
+        <li><b>5º lugar</b><span>GCM São João</span></li>
+        <li><b>47º lugar</b><span>PMPB · ampla concorrência</span></li>
+        <li><b>Aprovada</b><span>PMPE 2024</span></li>
+        <li><b>Aprovada</b><span>GCM Santa Cruz do Capibaribe</span></li>
+        <li class="aprov__wide"><b>90% de acerto</b><span>Polícia Penal RN · aguardando resultado final</span></li>
+      </ul>
+
+      <blockquote class="quote">
+        “Redação não se aprende lendo. Se aprende escrevendo, errando e
+        reescrevendo com alguém apontando o caminho.”
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- GALERIA DE FOTOS: salvar em public/shayenne-1.webp, -2 e -3
+       (paisagem ou quadradas, ~1000px). Foto que não existir some sozinha;
+       sem nenhuma, a faixa inteira fica escondida. -->
+  <div class="wrap">
+    <div class="galeria" data-galeria>
+      <figure class="galeria__item reveal"><img src="public/shayenne-1.webp" alt="Prof.ª Shayenne" onerror="var g=this.closest('[data-galeria]');this.parentNode.remove();if(!g.querySelector('.galeria__item'))g.hidden=true"></figure>
+      <figure class="galeria__item reveal"><img src="public/shayenne-2.webp" alt="Prof.ª Shayenne" onerror="var g=this.closest('[data-galeria]');this.parentNode.remove();if(!g.querySelector('.galeria__item'))g.hidden=true"></figure>
+      <figure class="galeria__item reveal"><img src="public/shayenne-3.webp" alt="Prof.ª Shayenne" onerror="var g=this.closest('[data-galeria]');this.parentNode.remove();if(!g.querySelector('.galeria__item'))g.hidden=true"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ESCASSEZ ───────────────────────────────────────── -->
+<section class="section section--scarce" id="vagas">
+  <div class="wrap scarce">
+    <div class="scarce__txt reveal">
+      <p class="eyebrow eyebrow--ember">Por que só 25?</p>
+      <h2 class="h2">Porque cada redação passa <em>pelas mãos dela.</em></h2>
+      <p class="prose">
+        Com turma grande, correção vira carimbo. Com 25 alunos, a Prof.ª
+        Shayenne consegue ler cada texto, toda semana, e devolver com
+        comentário de verdade. Por isso a turma é única e o limite não abre
+        exceção.
+      </p>
+    </div>
+    <div class="seats seats--big reveal" aria-label="Turma limitada a 25 alunos">
+      <div class="seats__grid" data-seats></div>
+      <p class="seats__label" data-vagas-texto>Apenas <b>25 cadeiras</b>. Esgotou, fechou.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OFERTA ─────────────────────────────────────────── -->
+<section class="section" id="inscricao">
+  <div class="wrap">
+    <div class="offer reveal">
+      <div class="offer__glow" aria-hidden="true"></div>
+      <div class="offer__l">
+        <p class="eyebrow">Sua vaga na turma</p>
+        <h2 class="offer__title">Isolada de <em>Redação</em></h2>
+        <p class="offer__by">com a Prof.ª Shayenne · CPPEM Concursos</p>
+        <ul class="checks checks--offer">
+          <li>8 encontros ao vivo, aos sábados, das 15h30 às 17h, salvos na plataforma</li>
+          <li>8 temas de redação</li>
+          <li>8 correções individuais feitas pela própria professora</li>
+          <li>Aulas gravadas de redação da plataforma CPPEM</li>
+          <li>Grupo VIP com os alunos da turma</li>
+          <li>Apoio pedagógico e do time CPPEM</li>
+          <li>Turma fechada em 25 alunos</li>
+        </ul>
+      </div>
+
+      <div class="offer__r">
+        <div class="countdown" id="countdown" aria-live="off">
+          <p class="countdown__label">A primeira aula começa em</p>
+          <div class="countdown__row">
+            <span><b data-cd="d">00</b><small>dias</small></span>
+            <span><b data-cd="h">00</b><small>horas</small></span>
+            <span><b data-cd="m">00</b><small>min</small></span>
+            <span><b data-cd="s">00</b><small>seg</small></span>
+          </div>
+        </div>
+
+        <div class="price">
+          <p class="price__parc">12x de</p>
+          <p class="price__big"><small>R$</small>29<span>,20</span></p>
+          <p class="price__vista">ou <b>R$ 279,90</b> à vista</p>
+        </div>
+
+        <a class="btn btn--xl btn--block js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="oferta">
+          Garantir minha vaga
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <p class="offer__safe">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+          Checkout seguro do CPPEM
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ────────────────────────────────────────────── -->
+<section class="section section--alt" id="faq">
+  <div class="wrap wrap--narrow">
+    <header class="sec-head reveal">
+      <p class="eyebrow">Dúvidas</p>
+      <h2 class="h2">Perguntas <em>frequentes</em></h2>
+    </header>
+
+    <div class="faq">
+      <details class="reveal">
+        <summary>E se eu não puder estar ao vivo em algum sábado?</summary>
+        <p>Todos os encontros ficam salvos na plataforma. Você assiste depois, pega o tema da semana e entrega a sua redação normalmente, dentro do prazo, até a terça-feira seguinte.</p>
+      </details>
+      <details class="reveal">
+        <summary>Qual é o prazo para entregar a redação?</summary>
+        <p>Até a terça-feira seguinte a cada encontro. Redação entregue depois disso não é corrigida, porque a professora precisa devolver todas antes do próximo sábado.</p>
+      </details>
+      <details class="reveal">
+        <summary>Quem corrige as redações?</summary>
+        <p>A própria Prof.ª Shayenne, aprovada em 8 concursos públicos, durante a semana. É justamente por isso que a turma é limitada a 25 alunos.</p>
+      </details>
+      <details class="reveal">
+        <summary>Serve para qual banca?</summary>
+        <p>O conteúdo abrange a redação das principais bancas examinadoras de carreiras policiais, com atenção especial a Cebraspe e AOCP.</p>
+      </details>
+      <details class="reveal">
+        <summary>Quando e em que horário são os encontros?</summary>
+        <p>São 8 encontros ao vivo, todo sábado, das 15h30 às 17h (horário de Brasília). Começa em 03/10 e termina em 21/11.</p>
+      </details>
+      <details class="reveal">
+        <summary>Onde eu tiro dúvidas durante a semana?</summary>
+        <p>No Grupo VIP da turma, com os outros alunos, e com o apoio pedagógico do time CPPEM durante todo o processo.</p>
+      </details>
+      <details class="reveal">
+        <summary>Posso parcelar?</summary>
+        <p>Sim: em até 12x de R$ 29,20, ou R$ 279,90 à vista.</p>
+      </details>
+      <details class="reveal">
+        <summary>O que acontece quando as 25 vagas acabarem?</summary>
+        <p>A turma fecha. Como a correção é individual e feita pela professora, não abrimos vagas extras nesta edição.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ──────────────────────────────────────── -->
+<section class="final" id="final">
+  <div class="wrap final__in reveal">
+    <p class="eyebrow eyebrow--ember">25 cadeiras · turma única</p>
+    <h2 class="final__title">A próxima redação que você escrever <em>pode ser a da aprovação.</em></h2>
+    <a class="btn btn--xl js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="final">
+      Quero minha vaga
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+    </a>
+    <p class="final__price">12x de R$ 29,20 · ou R$ 279,90 à vista</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <!-- Fio de brasa correndo no topo do rodapé -->
+  <span class="footer__fire" aria-hidden="true"></span>
+
+  <!-- Letreiro gigante: a mesma dupla da hero, agora em contorno -->
+  <div class="footer__mark" aria-hidden="true">
+    <div class="footer__mark-in">
+      <span class="footer__mark-top"><span class="footer__mark-l">ISOLADA</span><span class="footer__mark-de">DE</span></span>
+      <span class="footer__mark-r">REDAÇÃO</span>
+    </div>
+  </div>
+
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <img class="footer__logo" src="public/logo-cppem.png" alt="CPPEM Concursos Públicos" width="700" height="239" loading="lazy">
+      <p>Isolada de Redação com a Prof.ª Shayenne: oito sábados escrevendo, sendo corrigido e reescrevendo até a redação deixar de ser o obstáculo.</p>
+      <div class="footer__social">
+          <a href="https://wa.me/5581973105354" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1s-.5-.1-.7.2-.8 1-.9 1.1-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.5.3-.5v-.5L9 6.9c-.2-.5-.4-.4-.5-.4h-.6a1.1 1.1 0 0 0-.8.4A3.4 3.4 0 0 0 6 9.3c0 1.5 1.1 3 1.3 3.2a12 12 0 0 0 4.6 4c.6.3 1.1.5 1.5.6.7.2 1.3.2 1.7.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.1-1.4zM12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/cppemconcursos/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9s.7.8.9 1.4c.1.4.3 1 .4 2.2 0 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4s-.8.7-1.4.9c-.4.1-1 .3-2.2.4-1.3 0-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.8 3.8 0 0 1-1.4-.9 3.8 3.8 0 0 1-.9-1.4c-.1-.4-.3-1-.4-2.2 0-1.3-.1-1.7-.1-4.9s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4s.8-.7 1.4-.9c.4-.1 1-.3 2.2-.4 1.3 0 1.7-.1 4.9-.1zM12 0C8.7 0 8.3 0 7 .1 5.7.1 4.8.3 4.1.6c-.8.3-1.4.7-2 1.4-.7.6-1.1 1.2-1.4 2C.3 4.7.1 5.6.1 6.9 0 8.2 0 8.6 0 12s0 3.8.1 5.1c0 1.3.2 2.2.5 2.9.3.8.7 1.4 1.4 2 .6.7 1.2 1.1 2 1.4.7.3 1.6.5 2.9.5 1.3.1 1.7.1 5.1.1s3.8 0 5.1-.1c1.3 0 2.2-.2 2.9-.5.8-.3 1.4-.7 2-1.4.7-.6 1.1-1.2 1.4-2 .3-.7.5-1.6.5-2.9.1-1.3.1-1.7.1-5.1s0-3.8-.1-5.1c0-1.3-.2-2.2-.5-2.9-.3-.8-.7-1.4-1.4-2-.6-.7-1.2-1.1-2-1.4-.7-.3-1.6-.5-2.9-.5C15.8 0 15.4 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.4a1.4 1.4 0 1 1-2.9 0 1.4 1.4 0 0 1 2.9 0z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@cppemconcursos" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8a4.3 4.3 0 0 1-1-2.8h-3.3v13.2a2.4 2.4 0 1 1-2.4-2.4c.2 0 .5 0 .7.1v-3.3a5.7 5.7 0 1 0 5 5.7V9.7a7.6 7.6 0 0 0 4.4 1.4V7.8a4.3 4.3 0 0 1-3.4-2z"/></svg>
+          </a>
+          <a href="https://www.threads.net/@cppemconcursos" target="_blank" rel="noopener" aria-label="Threads">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.2 2c-4.9 0-8 3.2-8.2 8.3v3.4c.2 5.1 3.3 8.3 8.2 8.3h.1c2.6 0 4.5-.7 6-2.2 1.9-2 1.9-4.5 1.3-6-.5-1.3-1.5-2.3-2.9-2.9-.1-2.3-1.5-3.7-3.9-3.7-1.5 0-2.9.7-3.6 1.9l1.6 1.1c.4-.7 1.1-1 2-1 1 0 1.7.5 1.9 1.5a9 9 0 0 0-1.8-.1c-2.4.1-4 1.5-3.9 3.5 0 1 .5 1.9 1.4 2.4.7.5 1.6.7 2.6.6 1.3-.1 2.3-.6 3-1.5.5-.7.8-1.5.9-2.6.5.3.9.8 1.1 1.3.3.9.4 2.4-.9 3.7-1.1 1.1-2.5 1.6-4.6 1.6h-.1c-3.8 0-6-2.4-6.2-6.5v-3.2C6.2 6.5 8.4 4 12.1 4h.1c3.8 0 6 2.4 6.2 6.5v.1l2-.1v-.1C20.1 5.2 17 2 12.2 2zm.3 12.2c-.1.9-.6 1.7-1.7 1.8-.7 0-1.4-.3-1.5-1-.1-.6.4-1.2 1.7-1.3h.5c.3 0 .7 0 1 .1v.4z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@cppemconcursos" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.5a3 3 0 0 0-2.1-2.1C19.5 3.9 12 3.9 12 3.9s-7.5 0-9.4.5A3 3 0 0 0 .5 6.5C0 8.4 0 12 0 12s0 3.6.5 5.5a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.5.5-5.5s0-3.6-.5-5.5zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/people/Cppem-Cursos-preparat%C3%B3rios/61550943416378/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.6 4.5-4.6 1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.5 0-1.9.9-1.9 1.8V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></svg>
+          </a>
+        </div>
+    </div>
+
+    <nav class="footer__col" aria-label="A turma">
+      <h4>A turma</h4>
+      <a href="#como">Como funciona</a>
+      <a href="#beneficios">O que está incluído</a>
+      <a href="#cronograma">Cronograma</a>
+      <a href="#professora">A professora</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="CPPEM">
+      <h4>CPPEM</h4>
+      <a href="https://cppem.com.br/turmas" target="_blank" rel="noopener">Turmas</a>
+      <a href="https://cppem.com.br/combate" target="_blank" rel="noopener">Plano de Combate</a>
+      <a href="https://unicive.cppem.com.br" target="_blank" rel="noopener">Faculdade EAD</a>
+      <a href="https://cppem.com.br/noticias" target="_blank" rel="noopener">Notícias</a>
+      <a href="https://loja.cppem.com.br" target="_blank" rel="noopener">Loja</a>
+    </nav>
+
+    <nav class="footer__col" aria-label="Institucional">
+      <h4>Institucional</h4>
+      <a href="https://cppem.com.br/quem-somos" target="_blank" rel="noopener">Quem Somos</a>
+      <a href="https://cppem.com.br/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>
+      <a href="https://cppem.notion.site/vagas" target="_blank" rel="noopener">Trabalhe Conosco</a>
+      <a href="https://wa.me/5581973105354" target="_blank" rel="noopener">Fale no WhatsApp</a>
+    </nav>
+  </div>
+
+  <!-- Faixa da turma: última chamada antes do rodapé fechar -->
+  <div class="wrap">
+    <div class="footer__call">
+      <p><span class="pulse"></span> <b data-vagas-curto>Turma única · 25 vagas</b> <span class="footer__call-sep">·</span> Sábados, 15h30 às 17h <span class="footer__call-sep">·</span> Início 03/10</p>
+      <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="footer">Garantir vaga</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+   <div class="footer__bar">
+    <span>&copy; <span id="year">2026</span> <strong>CPPEM Concursos Públicos LTDA.</strong> Onde o concurseiro vira policial.</span>
+    <span>CNPJ 57.347.872/0001-48</span>
+   </div>
+  </div>
+</footer>
+
+<!-- Barra fixa do mobile: só aparece depois da hero -->
+<div class="dock" id="dock">
+  <div class="dock__txt"><b>12x R$ 29,20</b><small data-vagas-curto>Turma única · 25 vagas</small></div>
+  <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="dock">Garantir vaga</a>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
