@@ -352,14 +352,14 @@
   /* =========================================================
      EXIT POPUP
      Mesmas regras do kit da Operação Alvorada:
-     - só arma depois de 8s na página;
+     - só arma depois de 5s na página (?popup=teste zera as travas);
      - desktop: o mouse sai pelo topo (indo para o X ou para as abas);
      - mobile: arremesso de volta ao topo, ou 25s sem mexer;
      - no máximo uma vez por visita; fechou, fica 3 dias quieto;
      - nunca para quem já clicou em algum botão do checkout.
      ========================================================= */
   var XP = {
-    armDelay: 8000,
+    armDelay: 5000,
     idleDelay: 25000,
     snoozeDays: 3,
     scrollUpMinPx: 1200,
@@ -371,6 +371,14 @@
   };
   var KEY_SEEN = "isolada_exit_seen";
   var KEY_SNOOZE = "isolada_exit_snooze";
+
+  // Link de teste: ?popup=teste zera as travas deste navegador (já viu,
+  // fechou há menos de 3 dias, já clicou no checkout) e arma em 1s.
+  var xpTeste = /[?&]popup=teste(&|$)/.test(window.location.search);
+  if (xpTeste) {
+    try { sessionStorage.removeItem(KEY_SEEN); localStorage.removeItem(KEY_SNOOZE); localStorage.removeItem(KEY_CHECKOUT); } catch (e) {}
+    XP.armDelay = 1000;
+  }
 
   var xp = document.getElementById("xp");
   if (xp) {
@@ -436,13 +444,30 @@
       xpCleanup.push(function () { alvo.removeEventListener(tipo, fn, opts); });
     };
 
-    var coarse = window.matchMedia("(pointer: coarse)").matches;
+    var mq = function (q) { return window.matchMedia && window.matchMedia(q).matches; };
+    var temMouse = mq("(any-hover: hover)") || mq("(any-pointer: fine)");
+    var coarse = mq("(pointer: coarse)");
 
-    if (!coarse) {
-      xpOn(document, "mouseout", function (e) {
-        if (!e.relatedTarget && e.clientY <= 0) xpShow("desktop");
-      });
-    } else {
+    // Desktop: o mouse sai da página por cima (indo para o X, abas ou barra
+    // de endereço). Com mouse rápido o navegador registra a saída alguns px
+    // abaixo do topo, e não em 0 — por isso a folga de 20px, ou saída por
+    // cima enquanto o mouse vinha subindo perto do topo.
+    // Vale também para notebook com tela touch, que tem mouse E toque.
+    if (temMouse) {
+      var mouseY = null, subindo = false;
+      xpOn(document, "mousemove", function (e) {
+        if (mouseY !== null) subindo = e.clientY < mouseY;
+        mouseY = e.clientY;
+      }, { passive: true });
+      var saiuPorCima = function (e) {
+        if (e.relatedTarget) return;
+        if (e.clientY <= 20 || (subindo && mouseY !== null && mouseY < 90 && e.clientY < 90)) xpShow("desktop");
+      };
+      xpOn(document, "mouseout", saiuPorCima);
+      xpOn(document.documentElement, "mouseleave", saiuPorCima);
+    }
+
+    if (coarse) {
       // Mobile: só dispara no gesto inteiro — arremesso longo, sem pausa,
       // terminando no começo da página. Rolagem normal para cima não conta.
       var idleT = null;
