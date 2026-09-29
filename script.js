@@ -10,7 +10,7 @@
        Ao colocar um número (ex.: 9), as cadeiras ocupadas aparecem apagadas e
        os textos passam a dizer "Restam 9 vagas". Use o número REAL de
        inscritos: escassez inventada queima a confiança da marca. */
-    vagasRestantes: null,
+    vagasRestantes: 11,
 
     /* Primeiro encontro: sábado, 03/10, às 15h30 (Brasília). */
     inicio: "2026-10-03T15:30:00-03:00"

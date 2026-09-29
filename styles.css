@@ -637,6 +637,29 @@ html:not(.js) .collide__w--r { animation: sweep 5.5s .45s ease-in-out infinite; 
 .price__big span { font-size: .45em; }
 .price__vista { color: var(--text-dim); font-size: 1.05rem; }
 .price__vista b { color: var(--gold-pale); }
+/* Preço cheio riscado + selo de desconto: a oferta tem que parecer promoção */
+.price__de {
+  display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 14px;
+  font-family: var(--font-title); font-size: 15px; letter-spacing: .06em; color: var(--text-mute);
+}
+.price__de s {
+  font-size: 1.25em; font-weight: 700; color: var(--text-dim);
+  text-decoration-line: line-through; text-decoration-color: var(--ember-hot); text-decoration-thickness: 2px;
+}
+.price__tag {
+  padding: 5px 10px; font-weight: 800; font-size: 14px; letter-spacing: .04em; color: #fff;
+  background: linear-gradient(180deg, var(--ember-hot), var(--ember));
+  clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+  box-shadow: 0 0 18px rgba(255,106,69,.5);
+  animation: tagPulse 1.8s ease-in-out infinite;
+}
+@keyframes tagPulse { 50% { transform: scale(1.08); filter: brightness(1.15); } }
+.price__eco {
+  display: inline-block; margin-top: 10px; padding: 5px 12px;
+  font-family: var(--font-title); font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ember-hot); border: 1px solid rgba(255,106,69,.4); background: rgba(214,69,44,.1);
+}
+.price__eco b { color: #fff; }
 .offer__safe { display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; color: var(--text-mute); margin-top: -10px; }
 .offer__safe svg { width: 18px; height: 18px; fill: none; stroke: var(--gold); stroke-width: 1.8; stroke-linejoin: round; stroke-linecap: round; }
 
