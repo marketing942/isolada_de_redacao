@@ -100,11 +100,6 @@ strong { color: var(--gold-pale); font-weight: 700; }
 .wrap--narrow { max-width: 820px; }
 
 /* ─── CAMADAS FIXAS ───────────────────────────────────── */
-.embers {
-  position: fixed; inset: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 40;
-  mix-blend-mode: screen;
-}
 .grain {
   position: fixed; inset: -50%; z-index: 41; pointer-events: none; opacity: .05;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
@@ -424,21 +419,8 @@ html:not(.js) .collide__w--r { animation: sweep 5.5s .45s ease-in-out infinite; 
 .hero__scroll span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; margin-left: -1.5px; background: var(--gold); border-radius: 2px; animation: scrollDot 1.8s infinite; }
 @keyframes scrollDot { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
 
-/* ─── VAGAS (cadeiras) ────────────────────────────────── */
+/* ─── VAGAS ────────────────────────────────── */
 .seats { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.seats__grid { display: grid; gap: 5px; }
-.seats--big .seats__grid { grid-template-columns: repeat(5, 1fr); gap: 12px; }
-.seat {
-  display: block; background: linear-gradient(180deg, var(--gold-pale), var(--gold));
-  box-shadow: 0 0 10px rgba(214,69,44,.45);
-  animation: seatGlow 3s ease-in-out infinite; animation-delay: calc(var(--i) * 90ms);
-}
-.seats--big .seat {
-  width: clamp(38px, 10vw, 56px); aspect-ratio: 1;
-  clip-path: polygon(18% 0, 82% 0, 82% 50%, 100% 50%, 100% 100%, 86% 100%, 86% 78%, 14% 78%, 14% 100%, 0 100%, 0 50%, 18% 50%);
-}
-.seat.is-taken { background: #2a2a31; box-shadow: none; animation: none; }
-@keyframes seatGlow { 50% { filter: brightness(1.25); box-shadow: 0 0 16px rgba(255,106,69,.7); } }
 .seats__label { font-family: var(--font-title); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-dim); }
 .seats__label b { color: var(--ember-hot); }
 
@@ -795,21 +777,14 @@ html:not(.js) .collide__w--r { animation: sweep 5.5s .45s ease-in-out infinite; 
 
 .wa__btn {
   position: relative; width: 60px; height: 60px; border-radius: 50%;
-  display: grid; place-items: center; color: #1a1206;
-  background: radial-gradient(circle at 30% 25%, #FFF3D6, var(--gold-pale) 22%, var(--gold) 60%, var(--gold-dark));
-  box-shadow: 0 10px 28px rgba(214,69,44,.4), 0 0 22px rgba(255,106,69,.25), 0 0 0 1px rgba(255,255,255,.18) inset;
+  display: grid; place-items: center; color: #fff;
+  background: #25D366;
+  box-shadow: 0 8px 22px rgba(0,0,0,.4);
   transition: transform .25s var(--ease);
 }
 .wa__btn:hover { transform: scale(1.08) rotate(-6deg); }
 .wa__btn:focus-visible { outline: 2px solid var(--gold-pale); outline-offset: 4px; }
 .wa__btn svg { width: 32px; height: 32px; fill: currentColor; position: relative; z-index: 1; }
-/* Duas ondas saindo do botão */
-.wa__btn::before, .wa__btn::after {
-  content: ""; position: absolute; inset: 0; border-radius: 50%;
-  border: 2px solid rgba(255,106,69,.7); animation: waRing 2.4s ease-out infinite;
-}
-.wa__btn::after { animation-delay: 1.2s; }
-@keyframes waRing { 0% { transform: scale(1); opacity: .9; } 100% { transform: scale(1.8); opacity: 0; } }
 .wa__badge {
   position: absolute; top: -2px; right: -2px; z-index: 2;
   min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px;
@@ -937,9 +912,6 @@ html:not(.js) .collide__w--r { animation: sweep 5.5s .45s ease-in-out infinite; 
 .xp__lead strong { color: var(--ember-hot); }
 
 .seats--xp { margin: 22px 0 4px; }
-.seats--xp .seats__grid { grid-template-columns: repeat(25, 1fr); gap: 3px; }
-.seats--xp .seat { width: 8px; height: 20px; }
-@media (min-width: 560px) { .seats--xp .seat { width: 11px; height: 24px; } }
 
 .xp__facts { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 18px 0 22px; }
 .xp__facts li {

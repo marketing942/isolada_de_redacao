@@ -6,9 +6,8 @@
 
     vagasTotal: 25,
 
-    /* Vagas que ainda restam. null = mostra só "25 cadeiras, turma única".
-       Ao colocar um número (ex.: 9), as cadeiras ocupadas aparecem apagadas e
-       os textos passam a dizer "Restam 9 vagas". Use o número REAL de
+    /* Vagas que ainda restam. null = mostra só "25 vagas, turma única".
+       Ao colocar um número (ex.: 9), os textos passam a dizer "Restam 9 vagas". Use o número REAL de
        inscritos: escassez inventada queima a confiança da marca. */
     vagasRestantes: 11,
 
@@ -46,15 +45,7 @@
      ========================================================= */
   var restantes = CONFIG.vagasRestantes;
   var temNumero = typeof restantes === "number" && restantes >= 0;
-  var ocupadas = temNumero ? CONFIG.vagasTotal - Math.min(restantes, CONFIG.vagasTotal) : 0;
-
-  document.querySelectorAll("[data-seats]").forEach(function (grid) {
-    var html = "";
-    for (var i = 0; i < CONFIG.vagasTotal; i++) {
-      html += '<span class="seat' + (i < ocupadas ? " is-taken" : "") + '" style="--i:' + i + '"></span>';
-    }
-    grid.innerHTML = html;
-  });
+  
   if (temNumero) {
     var txt = restantes === 0
       ? "<b>Turma esgotada</b>"
@@ -98,7 +89,6 @@
      Um sprite de brilho pré-renderizado e desenhado com drawImage:
      muito mais barato do que shadowBlur por partícula.
      ========================================================= */
-  var embersCanvas = document.getElementById("embers");
   var spawnEmbersAt = function () {};
 
   function makeGlow(r, g, b) {
@@ -116,78 +106,6 @@
   }
   var SPRITES = [makeGlow(255, 96, 60), makeGlow(255, 160, 110), makeGlow(200, 45, 30)];
 
-  if (embersCanvas && !reduced) {
-    var ec = embersCanvas.getContext("2d");
-    var W = 0, H = 0, embers = [], running = true;
-
-    var resizeE = function () {
-      W = window.innerWidth; H = window.innerHeight;
-      embersCanvas.width = W * DPR; embersCanvas.height = H * DPR;
-      ec.setTransform(DPR, 0, 0, DPR, 0, 0);
-    };
-    resizeE();
-    window.addEventListener("resize", resizeE);
-
-    var alvoQtd = function () { return Math.round(Math.min(70, Math.max(26, W / 20))); };
-
-    var nova = function (x, y, burst) {
-      return {
-        x: x != null ? x : Math.random() * W,
-        y: y != null ? y : H + 10 + Math.random() * 40,
-        vx: burst ? (Math.random() - 0.5) * 3 : (Math.random() - 0.5) * 0.3,
-        vy: burst ? -(1 + Math.random() * 3) : -(0.35 + Math.random() * 1.1),
-        r: 0.8 + Math.random() * (burst ? 2.6 : 2.2),
-        wob: Math.random() * Math.PI * 2,
-        wobS: 0.01 + Math.random() * 0.025,
-        life: 0,
-        max: burst ? 90 + Math.random() * 120 : 380 + Math.random() * 520,
-        sp: SPRITES[(Math.random() * SPRITES.length) | 0],
-        fl: Math.random() * 10
-      };
-    };
-    for (var i = 0; i < alvoQtd(); i++) {
-      var e = nova(); e.y = Math.random() * H; e.life = Math.random() * e.max * 0.6; embers.push(e);
-    }
-
-    spawnEmbersAt = function (x, y, n) {
-      for (var j = 0; j < n; j++) embers.push(nova(x + (Math.random() - 0.5) * 60, y + (Math.random() - 0.5) * 20, true));
-    };
-
-    var loopE = function () {
-      if (!running) return;
-      ec.clearRect(0, 0, W, H);
-      var alvoN = alvoQtd();
-      for (var k = embers.length - 1; k >= 0; k--) {
-        var p = embers[k];
-        p.life++;
-        p.wob += p.wobS;
-        p.x += p.vx + Math.sin(p.wob) * 0.45;
-        p.y += p.vy;
-        p.vx *= 0.99;
-        p.fl += 0.2;
-        var t = p.life / p.max;
-        if (t >= 1 || p.y < -20) {
-          if (embers.length > alvoN) embers.splice(k, 1);
-          else embers[k] = nova();
-          continue;
-        }
-        // entra rápido, apaga devagar, e cintila
-        var a = Math.min(1, t * 6) * (1 - t) * (0.65 + Math.sin(p.fl) * 0.35);
-        var s = p.r * 7;
-        ec.globalAlpha = a;
-        ec.drawImage(p.sp, p.x - s / 2, p.y - s / 2, s, s);
-      }
-      ec.globalAlpha = 1;
-      requestAnimationFrame(loopE);
-    };
-    requestAnimationFrame(loopE);
-
-    document.addEventListener("visibilitychange", function () {
-      var vis = !document.hidden;
-      if (vis && !running) { running = true; requestAnimationFrame(loopE); }
-      else if (!vis) running = false;
-    });
-  }
 
   /* =========================================================
      HERO — o choque
