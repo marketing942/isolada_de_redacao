@@ -117,6 +117,7 @@
       });
 
       if (proximo) setTimeout(tick, 1000);
+      else if (ultimoEmAndamento) setTimeout(tick, Math.max(1000, fimEdicao - agora + 1000));
     };
 
     tick();
