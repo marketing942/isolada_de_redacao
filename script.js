@@ -4,15 +4,18 @@
   var CONFIG = {
     checkout: "https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos",
 
-    vagasTotal: 25,
-
-    /* Vagas que ainda restam. null = mostra só "25 vagas, turma única".
-       Ao colocar um número (ex.: 9), os textos passam a dizer "Restam 9 vagas". Use o número REAL de
-       inscritos: escassez inventada queima a confiança da marca. */
-    vagasRestantes: 11,
-
-    /* Primeiro encontro: sábado, 03/10, às 15h30 (Brasília). */
-    inicio: "2026-10-03T15:30:00-03:00"
+    /* Oito sábados, de 05/12/2026 a 23/01/2027, às 15h30 (horário de Brasília). */
+    encontros: [
+      "2026-12-05T15:30:00-03:00",
+      "2026-12-12T15:30:00-03:00",
+      "2026-12-19T15:30:00-03:00",
+      "2026-12-26T15:30:00-03:00",
+      "2027-01-02T15:30:00-03:00",
+      "2027-01-09T15:30:00-03:00",
+      "2027-01-16T15:30:00-03:00",
+      "2027-01-23T15:30:00-03:00"
+    ],
+    fim: "2027-01-23T17:00:00-03:00"
   };
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -41,46 +44,81 @@
   });
 
   /* =========================================================
-     VAGAS
+     CONTAGEM REGRESSIVA — próximo encontro da edição 3.0
+     Avança automaticamente para o sábado seguinte após cada encontro.
      ========================================================= */
-  var restantes = CONFIG.vagasRestantes;
-  var temNumero = typeof restantes === "number" && restantes >= 0;
-  
-  if (temNumero) {
-    var txt = restantes === 0
-      ? "<b>Turma esgotada</b>"
-      : restantes === 1
-        ? "Resta <b>1 vaga</b> de 25"
-        : "Restam <b>" + restantes + " vagas</b> de 25";
-    document.querySelectorAll("[data-vagas-texto]").forEach(function (el) { el.innerHTML = txt; });
-    document.querySelectorAll("[data-vagas-curto]").forEach(function (el) {
-      el.textContent = restantes === 0 ? "Turma esgotada" : "Restam " + restantes + " de 25 vagas";
-    });
-  }
+  var countdowns = document.querySelectorAll("[data-countdown]");
+  var nextDateNodes = document.querySelectorAll("[data-next-date]");
+  var encontros = CONFIG.encontros.map(function (data) { return new Date(data); });
+  var fimEdicao = new Date(CONFIG.fim).getTime();
 
-  /* =========================================================
-     CONTAGEM REGRESSIVA
-     ========================================================= */
-  var cd = document.getElementById("countdown");
-  if (cd) {
-    var alvo = new Date(CONFIG.inicio).getTime();
-    var cel = {};
-    ["d", "h", "m", "s"].forEach(function (k) { cel[k] = cd.querySelector('[data-cd="' + k + '"]'); });
-    var pad = function (n) { return n < 10 ? "0" + n : String(n); };
-    var tick = function () {
-      var diff = Math.max(0, alvo - Date.now());
-      if (diff === 0) {
-        cd.querySelector(".countdown__label").textContent = "A turma já começou";
-        cd.querySelector(".countdown__row").hidden = true;
-        return;
-      }
-      var s = Math.floor(diff / 1000);
-      cel.d.textContent = pad(Math.floor(s / 86400));
-      cel.h.textContent = pad(Math.floor(s % 86400 / 3600));
-      cel.m.textContent = pad(Math.floor(s % 3600 / 60));
-      cel.s.textContent = pad(s % 60);
-      setTimeout(tick, 1000);
+  if (countdowns.length) {
+    var formatoLongo = new Intl.DateTimeFormat("pt-BR", {
+      weekday: "long", day: "2-digit", month: "long", timeZone: "America/Recife"
+    });
+    var formatoCurto = new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit", month: "2-digit", timeZone: "America/Recife"
+    });
+    var dataLegivel = function (data) {
+      var texto = formatoLongo.format(data);
+      return texto.charAt(0).toUpperCase() + texto.slice(1);
     };
+    var pad = function (n) { return n < 10 ? "0" + n : String(n); };
+
+    var tick = function () {
+      var agora = Date.now();
+      var proximo = null;
+
+      for (var i = 0; i < encontros.length; i++) {
+        if (encontros[i].getTime() > agora) {
+          proximo = encontros[i];
+          break;
+        }
+      }
+
+      var ultimoEmAndamento = !proximo && agora < fimEdicao;
+
+      countdowns.forEach(function (cd) {
+        var label = cd.querySelector(".countdown__label");
+        var data = cd.querySelector("[data-cd-date]");
+        var linha = cd.querySelector(".countdown__row");
+
+        if (!proximo) {
+          if (label) label.textContent = ultimoEmAndamento ? "Último encontro em andamento" : "Edição 3.0 concluída";
+          if (data) data.textContent = ultimoEmAndamento
+            ? "23 de janeiro de 2027 · até 17h"
+            : "Último encontro: 23 de janeiro de 2027";
+          if (linha) linha.hidden = true;
+          return;
+        }
+
+        if (label) label.textContent = "Próximo encontro em";
+        if (data) data.textContent = dataLegivel(proximo) + " · 15h30";
+        if (linha) linha.hidden = false;
+
+        var total = Math.max(0, Math.floor((proximo.getTime() - agora) / 1000));
+        var valores = {
+          d: Math.floor(total / 86400),
+          h: Math.floor(total % 86400 / 3600),
+          m: Math.floor(total % 3600 / 60),
+          s: total % 60
+        };
+
+        ["d", "h", "m", "s"].forEach(function (chave) {
+          var celula = cd.querySelector('[data-cd="' + chave + '"]');
+          if (celula) celula.textContent = pad(valores[chave]);
+        });
+      });
+
+      nextDateNodes.forEach(function (el) {
+        el.textContent = proximo
+          ? "Próximo encontro: " + formatoCurto.format(proximo) + " · 15h30"
+          : (ultimoEmAndamento ? "Último encontro em andamento" : "Edição 3.0 concluída");
+      });
+
+      if (proximo) setTimeout(tick, 1000);
+    };
+
     tick();
   }
 
@@ -483,70 +521,20 @@
   }
 
   /* =========================================================
-     WHATSAPP — botão fixo + balão de fala
-     O balão entra 7s depois de abrir a página, "digita" e troca de
-     mensagem a cada ~9s. Fechou no X, some até o fim da visita.
+     WHATSAPP — ícone flutuante discreto
      ========================================================= */
   var WA = {
     numero: "5581973105354",
-    texto: "Olá! Tenho uma dúvida sobre a Isolada de Redação com a Prof.ª Shayenne.",
-    atraso: 7000,
-    troca: 9000,
-    mensagens: [
-      "Ficou com alguma <b>dúvida</b> sobre a turma? Chama a gente aqui.",
-      "Quer saber se a isolada serve para o <b>seu concurso</b>? Fala com o time CPPEM.",
-      "São só <b>25 vagas</b>. Tira sua dúvida antes que a turma feche.",
-      "Dúvida sobre pagamento ou parcelamento? A gente responde <b>rapidinho</b>."
-    ]
+    texto: "Olá! Gostaria de saber mais sobre a Isolada de Redação 3.0."
   };
-  var KEY_WA = "isolada_wa_fechado";
 
   var waLink = "https://wa.me/" + WA.numero + "?text=" + encodeURIComponent(WA.texto);
   document.querySelectorAll("[data-wa-link]").forEach(function (a) {
     a.href = waLink;
     a.addEventListener("click", function () {
-      track("whatsapp_click", { origem: a.classList.contains("wa__btn") ? "botao" : "balao" });
+      track("whatsapp_click", { origem: "botao" });
     });
   });
-
-  var bubble = document.getElementById("waBubble");
-  var waMsg = document.getElementById("waMsg");
-  var waBadge = document.getElementById("waBadge");
-  if (bubble && waMsg && !Store.sGet(KEY_WA)) {
-    var iMsg = 0, waTimer = null;
-
-    var digitar = function (html) {
-      bubble.classList.add("is-typing");
-      setTimeout(function () {
-        waMsg.innerHTML = html;
-        bubble.classList.remove("is-typing");
-      }, reduced ? 0 : 1200);
-    };
-
-    var proxima = function () {
-      // não fica trocando mensagem por trás do popup de saída
-      if (!xp || xp.hidden) {
-        iMsg = (iMsg + 1) % WA.mensagens.length;
-        digitar(WA.mensagens[iMsg]);
-      }
-      waTimer = setTimeout(proxima, WA.troca);
-    };
-
-    setTimeout(function () {
-      if (Store.sGet(KEY_WA)) return;
-      bubble.hidden = false;
-      if (waBadge) waBadge.hidden = false;
-      digitar(WA.mensagens[0]);
-      waTimer = setTimeout(proxima, WA.troca);
-    }, WA.atraso);
-
-    document.getElementById("waBubbleX").addEventListener("click", function () {
-      Store.sSet(KEY_WA, "1");
-      clearTimeout(waTimer);
-      bubble.classList.add("is-out");
-      setTimeout(function () { bubble.hidden = true; }, 300);
-    });
-  }
 
   /* =========================================================
      REVELAÇÃO NO SCROLL
