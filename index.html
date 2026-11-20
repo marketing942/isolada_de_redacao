@@ -11,16 +11,14 @@
   (window,document,'script','dataLayer');</script>
   <!-- End Google Tag Manager -->
 
-  <!-- Marca que o JS está vivo: só assim o restante da hero espera o choque
-       para aparecer. Sem JS, tudo fica visível desde o início. -->
   <script>document.documentElement.classList.add('js')</script>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0B0D11">
+<meta name="theme-color" content="#0A0A0B">
 
 <title>Isolada de Redação 3.0 | CPPEM</title>
-<meta name="description" content="Isolada de Redação 3.0 com a Prof.ª Shayenne: 8 encontros ao vivo aos sábados, das 15h30 às 17h, de 05/12/2026 a 23/01/2027. 8 temas e 8 redações corrigidas pela própria professora. Foco em Cebraspe e AOCP.">
+<meta name="description" content="Isolada de Redação 3.0 com a Prof.ª Shayenne, para concursos da Polícia Militar, Polícia Civil e Polícia Penal: 8 encontros ao vivo aos sábados, das 15h30 às 17h30, de 05/12/2026 a 23/01/2027. 8 temas e 8 redações corrigidas pela própria professora. Foco em Cebraspe e AOCP.">
 
 <link rel="icon" href="public/favicon.ico" sizes="48x48">
 <link rel="icon" href="public/favicon-192.png" type="image/png" sizes="192x192">
@@ -31,14 +29,13 @@
 <meta property="og:site_name" content="CPPEM Concursos Públicos">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="Isolada de Redação 3.0 com a Prof.ª Shayenne">
-<meta property="og:description" content="Edição 3.0: 8 sábados ao vivo, das 15h30 às 17h, de 05/12/2026 a 23/01/2027. 8 temas e 8 correções individuais. Foco em Cebraspe e AOCP.">
+<meta property="og:description" content="Para concursos da Polícia Militar, Civil e Penal. 8 sábados ao vivo, das 15h30 às 17h30, de 05/12/2026 a 23/01/2027. 8 temas e 8 correções individuais. Foco em Cebraspe e AOCP.">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="public/banner-shayenne-everton.webp" media="(min-width: 701px)" fetchpriority="high">
-<link rel="preload" as="image" href="public/banner-shayenne-everton-mobile.webp" media="(max-width: 700px)" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oxanium:wght@600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="public/shayenne.webp" fetchpriority="high">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -47,18 +44,21 @@
 <noscript><iframe src="https://sgtm.cppem.com.br/ns.html?id=GTM-PJ379FLQ"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-<div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 
 <!-- ─── HEADER ─────────────────────────────────────────── -->
 <header class="header" id="header">
   <div class="wrap header__in">
-    <a class="brand brand--logo" href="#topo" aria-label="CPPEM Concursos — voltar ao topo">
+    <a class="brand" href="#topo" aria-label="CPPEM Concursos — voltar ao topo">
       <img src="public/logo-cppem.png" alt="CPPEM Concursos Públicos" width="700" height="239">
     </a>
-    <div class="header__edition" aria-label="Edição 3.0, oito encontros ao vivo">
-      <span class="header__edition-mark">3.0</span><span>EDIÇÃO 3.0 · 8 ENCONTROS</span>
-    </div>
+    <nav class="nav" aria-label="Seções da página">
+      <a href="#carreiras">Para quem</a>
+      <a href="#como">Como funciona</a>
+      <a href="#cronograma">Cronograma</a>
+      <a href="#professora">Professora</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
     <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="header">Garantir vaga</a>
   </div>
 </header>
@@ -67,80 +67,135 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ─── HERO ───────────────────────────────────────────── -->
 <section class="hero" id="hero">
-  <div class="hero__bg" id="heroBg" aria-hidden="true">
-    <!-- Banner da Shayenne: surge durante a passagem em câmera lenta e
-         escurece depois do choque para o texto ficar legível. -->
-    <picture class="hero__photo">
-      <source media="(max-width: 700px)" srcset="public/banner-shayenne-everton-mobile.webp">
-      <img src="public/banner-shayenne-everton.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
-    </picture>
-    <div class="hero__shade"></div>
-    <div class="hero__grid"></div>
-    <div class="hero__glow"></div>
+  <div class="hero__bg" aria-hidden="true">
+    <span class="hero__grid"></span>
+    <span class="hero__glow"></span>
   </div>
-
-  <!-- Palco do choque: clarão, anéis de onda e as faíscas (canvas próprio) -->
-  <div class="impact" aria-hidden="true">
-    <canvas class="impact__sparks" id="sparks"></canvas>
-    <span class="impact__flash"></span>
-    <span class="impact__flare"></span>
-    <span class="impact__ring"></span>
-    <span class="impact__ring impact__ring--2"></span>
-    <span class="impact__ring impact__ring--3"></span>
-  </div>
+  <!-- Cantoneiras de mira: abrem do centro até os cantos da hero -->
+  <div class="hero__hud" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
   <div class="wrap hero__in">
-    <p class="hero__edition"><span class="hero__edition-mark">3.0</span><span>EDIÇÃO 3.0 · REDAÇÃO COM ACOMPANHAMENTO</span></p>
-    <h1 class="collide" id="collide" aria-label="Isolada de Redação 3.0">
-      <span class="collide__row" aria-hidden="true">
-        <span class="collide__top"><span class="collide__w collide__w--l" data-text="ISOLADA">ISOLADA</span><span class="collide__de">DE</span></span>
-        <span class="collide__mid"></span>
-        <span class="collide__w collide__w--r" data-text="REDAÇÃO">REDAÇÃO</span>
-      </span>
-    </h1>
+    <div class="hero__copy">
+      <ul class="tags" aria-label="Carreiras atendidas">
+        <li class="tags__ed">Edição 3.0</li>
+        <li>Polícia Militar</li>
+        <li>Polícia Civil</li>
+        <li>Polícia Penal</li>
+      </ul>
 
-    <p class="hero__com">com a <em>Prof.ª Shayenne</em></p>
+      <h1 class="hero__title" aria-label="Isolada de Redação 3.0">
+        <span class="ln" aria-hidden="true"><span>ISOLADA</span></span>
+        <span class="ln" aria-hidden="true"><span>DE <b class="pen-word">REDAÇÃO<svg class="pen" viewBox="0 0 240 24" preserveAspectRatio="none"><path d="M3 15 C 36 3, 70 22, 108 11 S 180 19, 237 7"/></svg></b></span></span>
+        <span class="ver" aria-hidden="true">3.0</span>
+      </h1>
 
-    <div class="countdown countdown--hero" data-countdown aria-live="off">
-      <div class="countdown__head">
-        <span class="countdown__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v3l2 1"/></svg>
-        </span>
-        <div class="countdown__copy">
-          <p class="countdown__label">Próximo encontro em</p>
-          <p class="countdown__date" data-cd-date>Sábado, 05 de dezembro · 15h30</p>
+      <p class="hero__lead">
+        O treino de redação para quem vai encarar os concursos da
+        <strong>Polícia Militar, Polícia Civil e Polícia Penal</strong>.
+        Oito sábados ao vivo com a <em>Prof.ª Shayenne</em>, oito temas e oito
+        correções individuais.
+      </p>
+
+      <div class="countdown countdown--hero" data-countdown aria-live="off">
+        <div class="countdown__head">
+          <span class="countdown__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v3l2 1"/></svg>
+          </span>
+          <div class="countdown__copy">
+            <p class="countdown__label">Próximo encontro em</p>
+            <p class="countdown__date" data-cd-date>Sábado, 05 de dezembro · 15h30</p>
+          </div>
         </div>
+        <div class="countdown__row">
+          <span><b data-cd="d">00</b><small>dias</small></span>
+          <span><b data-cd="h">00</b><small>horas</small></span>
+          <span><b data-cd="m">00</b><small>min</small></span>
+          <span><b data-cd="s">00</b><small>seg</small></span>
+        </div>
+        <p class="countdown__note">Sábados · 15h30 às 17h30 · horário de Brasília</p>
       </div>
-      <div class="countdown__row">
-        <span><b data-cd="d">00</b><small>dias</small></span>
-        <span><b data-cd="h">00</b><small>horas</small></span>
-        <span><b data-cd="m">00</b><small>min</small></span>
-        <span><b data-cd="s">00</b><small>seg</small></span>
+
+      <div class="hero__cta">
+        <a class="btn btn--xl js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="hero">
+          Quero minha vaga
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--xl btn--ghost" href="#cronograma">Ver cronograma</a>
       </div>
-      <p class="countdown__note">Sábados · 15h30 às 17h · horário de Brasília</p>
     </div>
 
-    <div class="hero__cta">
-      <a class="btn btn--xl btn--ivory js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="hero">
-        Quero minha vaga
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
+    <!-- A folha de redação: linhas se escrevem, a professora corrige e carimba -->
+    <aside class="sheet" aria-label="Exemplo de redação corrigida pela professora">
+      <div class="sheet__top">
+        <span class="sheet__label">Redação · tema da semana</span>
+        <span class="sheet__n">01/08</span>
+      </div>
+      <figure class="sheet__photo">
+        <img src="public/shayenne.webp" alt="Prof.ª Shayenne" width="632" height="716" fetchpriority="high" decoding="async">
+        <i></i><i></i><i></i><i></i>
+        <figcaption>Prof.ª Shayenne · corrige cada texto</figcaption>
+      </figure>
+      <div class="sheet__lines" aria-hidden="true">
+        <i style="--w:92%"></i><i style="--w:78%"></i><i style="--w:96%"></i><i style="--w:64%"></i>
+      </div>
+      <ul class="sheet__notes" aria-hidden="true">
+        <li style="--d:2.35s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Tese</li>
+        <li style="--d:2.6s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Argumentos</li>
+        <li style="--d:2.85s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Coesão</li>
+        <li style="--d:3.1s"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>Norma-padrão</li>
+      </ul>
+      <div class="sheet__stamp" aria-hidden="true"><span>Corrigida</span><b>3.0</b></div>
+    </aside>
   </div>
 
-  <a class="hero__scroll" href="#problema" aria-label="Rolar para baixo"><span></span></a>
+  <a class="hero__scroll" href="#numeros" aria-label="Rolar para baixo"><span></span></a>
 </section>
 
-<!-- ─── FAIXA ──────────────────────────────────────────── -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>EDIÇÃO 3.0</span><i>◆</i><span>Cebraspe</span><i>◆</i><span>AOCP</span><i>◆</i><span>8 encontros ao vivo</span><i>◆</i><span>Correção individual</span><i>◆</i><span>05/12/2026 a 23/01/2027</span><i>◆</i>
-    <span>EDIÇÃO 3.0</span><i>◆</i><span>Cebraspe</span><i>◆</i><span>AOCP</span><i>◆</i><span>8 encontros ao vivo</span><i>◆</i><span>Correção individual</span><i>◆</i><span>05/12/2026 a 23/01/2027</span><i>◆</i>
+<!-- ─── NÚMEROS ────────────────────────────────────────── -->
+<section class="stats" id="numeros" aria-label="A turma em números">
+  <div class="wrap stats__in">
+    <div class="stat reveal"><b>8</b><span>encontros ao vivo</span></div>
+    <div class="stat reveal"><b>8</b><span>temas de redação</span></div>
+    <div class="stat reveal"><b>8</b><span>correções individuais</span></div>
+    <div class="stat reveal"><b>2h</b><span>de aula ao vivo por sábado</span></div>
   </div>
-</div>
+</section>
+
+<!-- ─── PARA QUEM ──────────────────────────────────────── -->
+<section class="section" id="carreiras">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="eyebrow">Para quem é</p>
+      <h2 class="h2">Feita para <em>três carreiras policiais.</em></h2>
+      <p class="sec-head__sub">A Isolada de Redação 3.0 serve para quem estuda para os concursos da Polícia Militar, da Polícia Civil e da Polícia Penal.</p>
+    </header>
+
+    <div class="careers">
+      <article class="career hud reveal">
+        <i></i><i></i><i></i><i></i>
+        <span class="career__sig" aria-hidden="true">PM</span>
+        <h3>Polícia Militar</h3>
+        <p>Treino da redação cobrada nos concursos da PM, no formato que a banca corrige.</p>
+      </article>
+      <article class="career hud reveal">
+        <i></i><i></i><i></i><i></i>
+        <span class="career__sig" aria-hidden="true">PC</span>
+        <h3>Polícia Civil</h3>
+        <p>Estrutura, argumentação e domínio da norma-padrão para a discursiva da PC.</p>
+      </article>
+      <article class="career hud reveal">
+        <i></i><i></i><i></i><i></i>
+        <span class="career__sig" aria-hidden="true">PP</span>
+        <h3>Polícia Penal</h3>
+        <p>Prática semanal de escrita e correção individual para a prova da Polícia Penal.</p>
+      </article>
+    </div>
+    <p class="careers__note reveal">Um só método para as três: escrever toda semana, receber a correção da professora e reescrever.</p>
+  </div>
+</section>
 
 <!-- ─── PROBLEMA ───────────────────────────────────────── -->
-<section class="section" id="problema">
+<section class="section section--alt" id="problema">
   <div class="wrap split">
     <div class="reveal">
       <p class="eyebrow">A prova que ninguém treina</p>
@@ -163,7 +218,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ─── COMO FUNCIONA ──────────────────────────────────── -->
-<section class="section section--alt" id="como">
+<section class="section" id="como">
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="eyebrow">Como funciona</p>
@@ -171,24 +226,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="sec-head__sub">Cada sábado abre um ciclo que só fecha quando a sua redação volta corrigida.</p>
     </header>
 
-    <ol class="cycle">
-      <li class="cycle__step reveal">
-        <span class="cycle__n" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v3l2 1"/></svg><small>01</small></span>
+    <ol class="flow">
+      <li class="flow__step reveal">
+        <span class="flow__n">01</span>
         <h3>Sábado, ao vivo</h3>
-        <p>Das 15h30 às 17h, com a Prof.ª Shayenne: estrutura, argumentação e o que a banca espera ler.</p>
+        <p>Das 15h30 às 17h30, com a Prof.ª Shayenne: estrutura, argumentação e o que a banca espera ler.</p>
       </li>
-      <li class="cycle__step reveal">
-        <span class="cycle__n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 20 9-9-3-3-9 9-1 4zM14 6l3 3M4 20h5M5 4h6M5 8h4"/></svg><small>02</small></span>
+      <li class="flow__step reveal">
+        <span class="flow__n">02</span>
         <h3>Tema da semana</h3>
         <p>Você sai de cada encontro com uma proposta de redação no estilo da banca para escrever.</p>
       </li>
-      <li class="cycle__step cycle__step--prazo reveal">
-        <span class="cycle__n" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4.5h6M8 12l2.5 2.5L16 9"/></svg><small>03</small></span>
+      <li class="flow__step flow__step--prazo reveal">
+        <span class="flow__n">03</span>
         <h3>Entrega até terça</h3>
         <p>A redação vai até a terça-feira seguinte ao encontro. <strong>Depois disso, não é corrigida.</strong></p>
       </li>
-      <li class="cycle__step reveal">
-        <span class="cycle__n" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="m9 10 2 2 4-4"/></svg><small>04</small></span>
+      <li class="flow__step reveal">
+        <span class="flow__n">04</span>
         <h3>Correção da professora</h3>
         <p>A própria Shayenne corrige o seu texto antes do próximo sábado. Nada de correção terceirizada.</p>
       </li>
@@ -196,43 +251,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </section>
 
-<!-- ─── BENEFÍCIOS ─────────────────────────────────────── -->
-<section class="section" id="beneficios">
-  <div class="wrap">
-    <header class="sec-head reveal">
+<!-- ─── INCLUÍDO ───────────────────────────────────────── -->
+<section class="section section--alt" id="beneficios">
+  <div class="wrap included">
+    <header class="included__head reveal">
       <p class="eyebrow">O que está incluído</p>
       <h2 class="h2">Oito de cada. <em>E mais um time inteiro.</em></h2>
+      <p class="sec-head__sub">Tudo o que você precisa para escrever, ser corrigido e evoluir em 8 semanas.</p>
+      <a class="btn js-checkout included__cta" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="incluido">Quero minha vaga</a>
     </header>
 
-    <div class="trio">
-      <article class="trio__item reveal">
-        <b class="trio__n">8</b>
-        <h3>Encontros ao vivo</h3>
-        <p>Todos ficam salvos na plataforma para você rever quando quiser.</p>
-      </article>
-      <article class="trio__item reveal">
-        <b class="trio__n">8</b>
-        <h3>Temas de redação</h3>
-        <p>Uma proposta nova a cada encontro, no formato da banca.</p>
-      </article>
-      <article class="trio__item reveal">
-        <b class="trio__n">8</b>
-        <h3>Correções individuais</h3>
-        <p>Feitas pela própria Prof.ª Shayenne, com devolutiva no seu texto.</p>
-      </article>
-    </div>
-
-    <ul class="extras">
-      <li class="reveal">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="1"/><path d="M10 9l4 2-4 2z"/><path d="M8 21h8"/></svg>
+    <ul class="rows">
+      <li class="row reveal"><b class="row__n">8</b><div><h3>Encontros ao vivo</h3><p>Todos ficam salvos na plataforma para você rever quando quiser.</p></div></li>
+      <li class="row reveal"><b class="row__n">8</b><div><h3>Temas de redação</h3><p>Uma proposta nova a cada encontro, no formato da banca.</p></div></li>
+      <li class="row reveal"><b class="row__n">8</b><div><h3>Correções individuais</h3><p>Feitas pela própria Prof.ª Shayenne, com devolutiva no seu texto.</p></div></li>
+      <li class="row reveal">
+        <span class="row__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="1"/><path d="M10 9l4 2-4 2z"/><path d="M8 21h8"/></svg></span>
         <div><h3>Aulas gravadas de redação</h3><p>Acesso às aulas de redação da plataforma CPPEM para reforçar o conteúdo entre um sábado e outro.</p></div>
       </li>
-      <li class="reveal">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg>
+      <li class="row reveal">
+        <span class="row__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span>
         <div><h3>Grupo VIP da turma</h3><p>Um grupo com os outros alunos para tirar dúvidas e manter o ritmo de escrita.</p></div>
       </li>
-      <li class="reveal">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+      <li class="row reveal">
+        <span class="row__ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
         <div><h3>Apoio pedagógico</h3><p>O time pedagógico do CPPEM acompanha você durante todo o processo.</p></div>
       </li>
     </ul>
@@ -240,16 +282,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ─── BANCAS ─────────────────────────────────────────── -->
-<section class="section section--alt" id="bancas">
+<section class="section" id="bancas">
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="eyebrow">Foco de banca</p>
       <h2 class="h2">Duas bancas. <em>Dois jeitos de corrigir.</em></h2>
-      <p class="sec-head__sub">Os encontros cobrem a redação das principais bancas de carreiras policiais, com atenção especial às duas que mais aparecem nos editais.</p>
+      <p class="sec-head__sub">Os encontros cobrem a redação das principais bancas dos concursos da PM, da PC e da PP, com atenção especial às duas que mais aparecem nos editais.</p>
     </header>
 
     <div class="bancas">
-      <article class="banca reveal">
+      <article class="banca hud reveal">
+        <i></i><i></i><i></i><i></i>
         <span class="banca__tag">Banca</span>
         <h3 class="banca__nome">Cebraspe</h3>
         <ul class="checks">
@@ -259,7 +302,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Treino de planejamento para não fugir do comando</li>
         </ul>
       </article>
-      <article class="banca reveal">
+      <article class="banca hud reveal">
+        <i></i><i></i><i></i><i></i>
         <span class="banca__tag">Banca</span>
         <h3 class="banca__nome">AOCP</h3>
         <ul class="checks">
@@ -274,38 +318,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ─── CRONOGRAMA ─────────────────────────────────────── -->
-<section class="section" id="cronograma">
+<section class="section section--alt" id="cronograma">
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="eyebrow">Cronograma</p>
       <h2 class="h2">8 sábados. <em>De 05/12/2026 a 23/01/2027.</em></h2>
-      <p class="sec-head__sub">Sempre das <strong>15h30 às 17h</strong> (horário de Brasília), ao vivo.</p>
+      <p class="sec-head__sub">Sempre das <strong>15h30 às 17h30</strong> (horário de Brasília), ao vivo.</p>
     </header>
 
-    <ol class="timeline" id="timeline">
-      <li class="reveal"><span class="timeline__n">01</span><b>05/12</b><small>Abertura</small></li>
-      <li class="reveal"><span class="timeline__n">02</span><b>12/12</b><small>15h30</small></li>
-      <li class="reveal"><span class="timeline__n">03</span><b>19/12</b><small>15h30</small></li>
-      <li class="reveal"><span class="timeline__n">04</span><b>26/12</b><small>15h30</small></li>
-      <li class="reveal"><span class="timeline__n">05</span><b>02/01</b><small>15h30</small></li>
-      <li class="reveal"><span class="timeline__n">06</span><b>09/01</b><small>15h30</small></li>
-      <li class="reveal"><span class="timeline__n">07</span><b>16/01</b><small>15h30</small></li>
-      <li class="reveal"><span class="timeline__n">08</span><b>23/01</b><small>Encerramento</small></li>
+    <ol class="dates" id="timeline">
+      <li class="date reveal" data-encontro="0"><span class="date__n">01</span><b>05</b><span class="date__m">dez</span><small>Abertura</small></li>
+      <li class="date reveal" data-encontro="1"><span class="date__n">02</span><b>12</b><span class="date__m">dez</span><small>15h30</small></li>
+      <li class="date reveal" data-encontro="2"><span class="date__n">03</span><b>19</b><span class="date__m">dez</span><small>15h30</small></li>
+      <li class="date reveal" data-encontro="3"><span class="date__n">04</span><b>26</b><span class="date__m">dez</span><small>15h30</small></li>
+      <li class="date reveal" data-encontro="4"><span class="date__n">05</span><b>02</b><span class="date__m">jan</span><small>15h30</small></li>
+      <li class="date reveal" data-encontro="5"><span class="date__n">06</span><b>09</b><span class="date__m">jan</span><small>15h30</small></li>
+      <li class="date reveal" data-encontro="6"><span class="date__n">07</span><b>16</b><span class="date__m">jan</span><small>15h30</small></li>
+      <li class="date reveal" data-encontro="7"><span class="date__n">08</span><b>23</b><span class="date__m">jan</span><small>Encerramento</small></li>
     </ol>
-    <p class="timeline__note reveal">Perdeu um sábado? O encontro fica salvo na plataforma. Você assiste, pega o tema e entrega até terça, como todo mundo.</p>
+    <p class="dates__note reveal">Perdeu um sábado? O encontro fica salvo na plataforma. Você assiste, pega o tema e entrega até terça, como todo mundo.</p>
   </div>
 </section>
 
 <!-- ─── PROFESSORA ─────────────────────────────────────── -->
-<section class="section section--alt" id="professora">
+<section class="section" id="professora">
   <div class="wrap prof">
-    <figure class="prof__foto reveal">
-      <!-- FOTO PRINCIPAL: public/shayenne.webp, gerada de public/fotoshay.png.
-           Se o arquivo sumir, fica o monograma. -->
+    <figure class="prof__foto hud reveal">
+      <i></i><i></i><i></i><i></i>
       <span class="prof__mono" aria-hidden="true">S</span>
       <img src="public/shayenne.webp" alt="Prof.ª Shayenne" width="632" height="716" loading="lazy" onerror="this.remove()">
-      <span class="prof__corner prof__corner--tl"></span>
-      <span class="prof__corner prof__corner--br"></span>
       <figcaption class="prof__badge"><b>8</b><span>aprovações em<br>concursos públicos</span></figcaption>
     </figure>
     <div class="prof__txt reveal">
@@ -347,44 +388,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 
 <!-- ─── OFERTA ─────────────────────────────────────────── -->
-<section class="section" id="inscricao">
+<section class="section section--alt" id="inscricao">
   <div class="wrap">
-    <div class="offer reveal">
-      <div class="offer__glow" aria-hidden="true"></div>
-      <div class="offer__l">
+    <div class="offer hud reveal">
+      <i></i><i></i><i></i><i></i>
+      <div class="offer__price">
         <p class="eyebrow">Sua vaga na turma</p>
         <h2 class="offer__title">Isolada de <em>Redação 3.0</em></h2>
         <p class="offer__by">com a Prof.ª Shayenne · CPPEM Concursos</p>
-        <ul class="checks checks--offer">
-          <li>8 encontros ao vivo, aos sábados, das 15h30 às 17h, salvos na plataforma</li>
-          <li>8 temas de redação</li>
-          <li>8 correções individuais feitas pela própria professora</li>
-          <li>Aulas gravadas de redação da plataforma CPPEM</li>
-          <li>Grupo VIP com os alunos da turma</li>
-          <li>Apoio pedagógico e do time CPPEM</li>
-          <li>Acompanhamento em turma única, com correção individual</li>
-        </ul>
-      </div>
-
-      <div class="offer__r">
-        <div class="countdown countdown--offer" data-countdown aria-live="off">
-          <div class="countdown__head">
-            <span class="countdown__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v3l2 1"/></svg>
-            </span>
-            <div class="countdown__copy">
-              <p class="countdown__label">Próximo encontro em</p>
-              <p class="countdown__date" data-cd-date>05 de dezembro de 2026 · 15h30</p>
-            </div>
-          </div>
-          <div class="countdown__row">
-            <span><b data-cd="d">00</b><small>dias</small></span>
-            <span><b data-cd="h">00</b><small>horas</small></span>
-            <span><b data-cd="m">00</b><small>min</small></span>
-            <span><b data-cd="s">00</b><small>seg</small></span>
-          </div>
-          <p class="countdown__note">Sábados · 15h30 às 17h · horário de Brasília</p>
-        </div>
 
         <div class="price">
           <p class="price__de"><span class="price__tag">-25%</span> de <s>R$ 397,00</s> por</p>
@@ -403,12 +414,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           Checkout seguro do CPPEM
         </p>
       </div>
+
+      <div class="offer__list">
+        <p class="offer__head">O que você leva</p>
+        <ul class="checks checks--offer">
+          <li>8 encontros ao vivo, aos sábados, das 15h30 às 17h30, salvos na plataforma</li>
+          <li>8 temas de redação</li>
+          <li>8 correções individuais feitas pela própria professora</li>
+          <li>Aulas gravadas de redação da plataforma CPPEM</li>
+          <li>Grupo VIP com os alunos da turma</li>
+          <li>Apoio pedagógico e do time CPPEM</li>
+          <li>Acompanhamento em turma única, com correção individual</li>
+        </ul>
+
+        <div class="countdown countdown--offer" data-countdown aria-live="off">
+          <div class="countdown__head">
+            <span class="countdown__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M12 14v3l2 1"/></svg>
+            </span>
+            <div class="countdown__copy">
+              <p class="countdown__label">Próximo encontro em</p>
+              <p class="countdown__date" data-cd-date>05 de dezembro de 2026 · 15h30</p>
+            </div>
+          </div>
+          <div class="countdown__row">
+            <span><b data-cd="d">00</b><small>dias</small></span>
+            <span><b data-cd="h">00</b><small>horas</small></span>
+            <span><b data-cd="m">00</b><small>min</small></span>
+            <span><b data-cd="s">00</b><small>seg</small></span>
+          </div>
+          <p class="countdown__note">Sábados · 15h30 às 17h30 · horário de Brasília</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ─── FAQ ────────────────────────────────────────────── -->
-<section class="section section--alt" id="faq">
+<section class="section" id="faq">
   <div class="wrap wrap--narrow">
     <header class="sec-head reveal">
       <p class="eyebrow">Dúvidas</p>
@@ -416,6 +459,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </header>
 
     <div class="faq">
+      <details class="reveal">
+        <summary>Serve para qual carreira?</summary>
+        <p>Para quem estuda para os concursos da Polícia Militar, da Polícia Civil e da Polícia Penal. O método de escrever, ser corrigido e reescrever é o mesmo para as três.</p>
+      </details>
+      <details class="reveal">
+        <summary>Serve para qual banca?</summary>
+        <p>O conteúdo abrange a redação das principais bancas examinadoras dos concursos da PM, da PC e da PP, com atenção especial a Cebraspe e AOCP.</p>
+      </details>
+      <details class="reveal">
+        <summary>Quando e em que horário são os encontros?</summary>
+        <p>São 8 encontros ao vivo, todo sábado, das 15h30 às 17h30 (horário de Brasília). A edição 3.0 começa em 05/12/2026 e termina em 23/01/2027.</p>
+      </details>
       <details class="reveal">
         <summary>E se eu não puder estar ao vivo em algum sábado?</summary>
         <p>Todos os encontros ficam salvos na plataforma. Você assiste depois, pega o tema da semana e entrega a sua redação normalmente, dentro do prazo, até a terça-feira seguinte.</p>
@@ -427,14 +482,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <details class="reveal">
         <summary>Quem corrige as redações?</summary>
         <p>A própria Prof.ª Shayenne, aprovada em 8 concursos públicos, durante a semana. É justamente por isso que a turma é limitada a 25 alunos.</p>
-      </details>
-      <details class="reveal">
-        <summary>Serve para qual banca?</summary>
-        <p>O conteúdo abrange a redação das principais bancas examinadoras de carreiras policiais, com atenção especial a Cebraspe e AOCP.</p>
-      </details>
-      <details class="reveal">
-        <summary>Quando e em que horário são os encontros?</summary>
-        <p>São 8 encontros ao vivo, todo sábado, das 15h30 às 17h (horário de Brasília). A edição 3.0 começa em 05/12/2026 e termina em 23/01/2027.</p>
       </details>
       <details class="reveal">
         <summary>Onde eu tiro dúvidas durante a semana?</summary>
@@ -454,8 +501,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- ─── CTA FINAL ──────────────────────────────────────── -->
 <section class="final" id="final">
+  <div class="final__bg" aria-hidden="true"><span class="final__ver">3.0</span></div>
   <div class="wrap final__in reveal">
-    <p class="eyebrow eyebrow--ember">Edição 3.0 · 05/12/2026 a 23/01/2027</p>
+    <p class="eyebrow">Edição 3.0 · 05/12/2026 a 23/01/2027</p>
     <h2 class="final__title">A próxima redação que você escrever <em>pode ser a da aprovação.</em></h2>
     <a class="btn btn--xl js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="final">
       Quero minha vaga
@@ -468,21 +516,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </main>
 
 <footer class="footer">
-  <!-- Fio de brasa correndo no topo do rodapé -->
-  <span class="footer__fire" aria-hidden="true"></span>
-
-  <!-- Letreiro gigante: a mesma dupla da hero, agora em contorno -->
-  <div class="footer__mark" aria-hidden="true">
-    <div class="footer__mark-in">
-      <span class="footer__mark-top"><span class="footer__mark-l">ISOLADA</span><span class="footer__mark-de">DE</span></span>
-      <span class="footer__mark-r">REDAÇÃO</span>
-    </div>
-  </div>
-
   <div class="wrap footer__inner">
     <div class="footer__brand">
       <img class="footer__logo" src="public/logo-cppem.png" alt="CPPEM Concursos Públicos" width="700" height="239" loading="lazy">
-      <p>Isolada de Redação 3.0 com a Prof.ª Shayenne: oito sábados escrevendo, recebendo correção individual e reescrevendo com orientação.</p>
+      <p>Isolada de Redação 3.0 com a Prof.ª Shayenne: oito sábados escrevendo, recebendo correção individual e reescrevendo com orientação. Para concursos da Polícia Militar, Civil e Penal.</p>
       <div class="footer__social">
           <a href="https://wa.me/5581973105354" target="_blank" rel="noopener" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
@@ -507,6 +544,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <nav class="footer__col" aria-label="A turma">
       <h4>A turma</h4>
+      <a href="#carreiras">Para quem é</a>
       <a href="#como">Como funciona</a>
       <a href="#beneficios">O que está incluído</a>
       <a href="#cronograma">Cronograma</a>
@@ -532,10 +570,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </nav>
   </div>
 
-  <!-- Faixa da turma: última chamada antes do rodapé fechar -->
   <div class="wrap">
     <div class="footer__call">
-      <p><span class="pulse"></span> <b>EDIÇÃO 3.0</b> <span class="footer__call-sep">·</span> Sábados, 15h30 às 17h <span class="footer__call-sep">·</span> 05/12/2026 a 23/01/2027</p>
+      <p><span class="pulse"></span> <b>EDIÇÃO 3.0</b> <span class="footer__call-sep">·</span> Sábados, 15h30 às 17h30 <span class="footer__call-sep">·</span> 05/12/2026 a 23/01/2027</p>
       <a class="btn btn--sm js-checkout" href="https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos" data-local="footer">Garantir vaga</a>
     </div>
   </div>
@@ -566,15 +603,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      inatividade no mobile. Regras de quando pode aparecer: script.js. -->
 <div class="xp" id="xp" hidden>
   <div class="xp__overlay" data-xp-close></div>
-  <div class="xp__box" role="dialog" aria-modal="true" aria-labelledby="xpTitle" aria-describedby="xpLead">
+  <div class="xp__box hud" role="dialog" aria-modal="true" aria-labelledby="xpTitle" aria-describedby="xpLead">
+    <i></i><i></i><i></i><i></i>
     <div class="xp__inner">
       <button class="xp__close" type="button" data-xp-close aria-label="Fechar">&times;</button>
 
       <p class="xp__alert"><span class="pulse"></span> Edição 3.0</p>
       <h2 class="xp__title" id="xpTitle">A redação exige <em>treino orientado.</em></h2>
       <p class="xp__lead" id="xpLead">
-        A nova edição começa em <strong>05/12/2026</strong>. Serão 8 encontros ao vivo,
-        com temas semanais e correções individuais feitas pela própria Prof.ª Shayenne.
+        Para concursos da Polícia Militar, Civil e Penal. A nova edição começa em <strong>05/12/2026</strong>:
+        8 encontros ao vivo, com temas semanais e correções individuais feitas pela própria Prof.ª Shayenne.
       </p>
 
       <ul class="xp__facts">

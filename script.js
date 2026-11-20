@@ -4,7 +4,7 @@
   var CONFIG = {
     checkout: "https://checkout.cppem.com.br/pay/isolada-de-redacao-com-shayenne-cppem-concursos",
 
-    /* Oito sábados, de 05/12/2026 a 23/01/2027, às 15h30 (horário de Brasília). */
+    /* Oito sábados, de 05/12/2026 a 23/01/2027, às 15h30, até 17h30 (horário de Brasília). */
     encontros: [
       "2026-12-05T15:30:00-03:00",
       "2026-12-12T15:30:00-03:00",
@@ -15,11 +15,10 @@
       "2027-01-16T15:30:00-03:00",
       "2027-01-23T15:30:00-03:00"
     ],
-    fim: "2027-01-23T17:00:00-03:00"
+    fim: "2027-01-23T17:30:00-03:00"
   };
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   /* ---------- ano ---------- */
   var year = document.getElementById("year");
@@ -86,7 +85,7 @@
         if (!proximo) {
           if (label) label.textContent = ultimoEmAndamento ? "Último encontro em andamento" : "Edição 3.0 concluída";
           if (data) data.textContent = ultimoEmAndamento
-            ? "23 de janeiro de 2027 · até 17h"
+            ? "23 de janeiro de 2027 · até 17h30"
             : "Último encontro: 23 de janeiro de 2027";
           if (linha) linha.hidden = true;
           return;
@@ -110,6 +109,13 @@
         });
       });
 
+      /* Cronograma: marca os encontros que já passaram e o próximo */
+      document.querySelectorAll("[data-encontro]").forEach(function (el) {
+        var i = parseInt(el.getAttribute("data-encontro"), 10);
+        el.classList.toggle("is-next", !!proximo && encontros[i] && encontros[i].getTime() === proximo.getTime());
+        el.classList.toggle("is-done", !!encontros[i] && encontros[i].getTime() + 2 * 3600e3 <= agora);
+      });
+
       nextDateNodes.forEach(function (el) {
         el.textContent = proximo
           ? "Próximo encontro: " + formatoCurto.format(proximo) + " · 15h30"
@@ -124,201 +130,10 @@
   }
 
   /* =========================================================
-     BRASAS — canvas fixo sobre a página inteira
-     Um sprite de brilho pré-renderizado e desenhado com drawImage:
-     muito mais barato do que shadowBlur por partícula.
-     ========================================================= */
-  var spawnEmbersAt = function () {};
-
-  function makeGlow(r, g, b) {
-    var c = document.createElement("canvas");
-    c.width = c.height = 64;
-    var x = c.getContext("2d");
-    var grd = x.createRadialGradient(32, 32, 0, 32, 32, 32);
-    grd.addColorStop(0, "rgba(255,250,235,1)");
-    grd.addColorStop(0.18, "rgba(" + r + "," + g + "," + b + ",0.95)");
-    grd.addColorStop(0.45, "rgba(" + r + "," + g + "," + b + ",0.25)");
-    grd.addColorStop(1, "rgba(" + r + "," + g + "," + b + ",0)");
-    x.fillStyle = grd;
-    x.fillRect(0, 0, 64, 64);
-    return c;
-  }
-  var SPRITES = [makeGlow(255, 96, 60), makeGlow(255, 160, 110), makeGlow(200, 45, 30)];
-
-
-  /* =========================================================
-     HERO — o choque
-     ========================================================= */
-  var hero = document.getElementById("hero");
-  var collide = document.getElementById("collide");
-  var row = collide && collide.querySelector(".collide__row");
-  // Centro do choque: a faixa entre as duas palavras
-  var seam = collide && collide.querySelector(".collide__mid");
-
-  /* Mantém ISOLADA + Redação numa linha só em qualquer largura:
-     se a linha não couber, reduz a fonte na proporção exata. */
-  function fit() {
-    if (!collide || !row) return;
-    collide.style.removeProperty("--fit");
-    var disp = collide.clientWidth;
-    // offsetWidth, e não scrollWidth: o scrollWidth conta as palavras ainda
-    // deslocadas pela animação de entrada, fora da tela.
-    // A folga de 12% cobre o que a inclinação (skew) projeta para os lados.
-    var larg = row.offsetWidth;
-    if (larg > disp * 0.88) {
-      var atual = parseFloat(getComputedStyle(collide).fontSize);
-      collide.style.setProperty("--fit", (atual * disp * 0.88 / larg).toFixed(2) + "px");
-    }
-  }
-  fit();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-  window.addEventListener("resize", fit);
-
-  function centro() {
-    var hr = hero.getBoundingClientRect();
-    var sr = seam.getBoundingClientRect();
-    return { x: sr.left + sr.width / 2 - hr.left, y: sr.top + sr.height / 2 - hr.top, vx: sr.left + sr.width / 2, vy: sr.top + sr.height / 2 };
-  }
-
-  /* Faíscas do impacto: traços incandescentes com arrasto e gravidade */
-  function burst(cx, cy) {
-    var cv = document.getElementById("sparks");
-    if (!cv) return;
-    var c = cv.getContext("2d");
-    var w = hero.clientWidth, h = hero.clientHeight;
-    cv.width = w * DPR; cv.height = h * DPR;
-    c.setTransform(DPR, 0, 0, DPR, 0, 0);
-
-    var parts = [];
-    var n = w < 600 ? 110 : 190;
-    for (var i = 0; i < n; i++) {
-      // Espalha mais na horizontal: é um choque lateral, não uma explosão redonda
-      var ang = Math.random() * Math.PI * 2;
-      var spd = 3 + Math.pow(Math.random(), 1.6) * (w < 600 ? 14 : 22);
-      parts.push({
-        x: cx + (Math.random() - 0.5) * 10,
-        y: cy + (Math.random() - 0.5) * 30,
-        vx: Math.cos(ang) * spd * 1.35,
-        vy: Math.sin(ang) * spd * 0.75 - 1.5,
-        life: 0,
-        max: 35 + Math.random() * 55,
-        hue: 4 + Math.random() * 30,
-        wd: 0.8 + Math.random() * 2
-      });
-    }
-
-    var loop = function () {
-      c.globalCompositeOperation = "source-over";
-      c.clearRect(0, 0, w, h);
-      c.globalCompositeOperation = "lighter";
-      var vivos = 0;
-      for (var i = 0; i < parts.length; i++) {
-        var p = parts[i];
-        if (p.life >= p.max) continue;
-        vivos++;
-        var px = p.x, py = p.y;
-        p.vx *= 0.94; p.vy = p.vy * 0.94 + 0.22;
-        p.x += p.vx; p.y += p.vy; p.life++;
-        var t = p.life / p.max;
-        var light = 90 - t * 35;
-        c.strokeStyle = "hsla(" + p.hue + ",100%," + light + "%," + (1 - t) + ")";
-        c.lineWidth = p.wd * (1 - t * 0.6);
-        c.lineCap = "round";
-        c.beginPath();
-        c.moveTo(px - p.vx * 1.6, py - p.vy * 1.6);
-        c.lineTo(p.x, p.y);
-        c.stroke();
-      }
-      if (vivos) requestAnimationFrame(loop);
-      else c.clearRect(0, 0, w, h);
-    };
-    requestAnimationFrame(loop);
-  }
-
-  /* Posição de partida de cada palavra: na vertical, encostada na sua
-     lateral da tela. O transform gira em volta do transform-origin (pé do
-     ISOLADA, topo do REDAÇÃO), então o centro visual depois do giro não é o
-     centro da caixa — as contas abaixo compensam isso. */
-  function posicionar() {
-    var vw = window.innerWidth, vh = window.innerHeight;
-    var nav = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--nav-h")) || 84;
-    var meio = nav + (vh - nav) / 2;
-    var margem = Math.max(12, vw * 0.035);
-    [[".collide__w--l", 1], [".collide__w--r", -1]].forEach(function (par) {
-      var el = collide.querySelector(par[0]);
-      var lado = par[1];
-      el.style.transform = "none";
-      var r = el.getBoundingClientRect();
-      el.style.transform = "";
-      var w = r.width, h = r.height;
-      var cx = r.left + w / 2, cy = r.top + h / 2;
-      // Na vertical a palavra pode crescer: no celular o título horizontal é
-      // pequeno, mas de pé ela tem a altura da tela para ocupar (~60%).
-      var big = Math.max(1, Math.min(1.8, (vh * 0.6) / w));
-      // centro visual depois de escalar e girar 90° em volta da origem
-      var rcx = cx - big * h / 2;
-      var rcy = lado === 1 ? cy + h / 2 : cy - h / 2;
-      var tx = lado === 1 ? margem + big * h / 2 : vw - margem - big * h / 2;
-      el.style.setProperty("--big", big.toFixed(3));
-      var curso = Math.min(vh * 0.12, 110);          // quanto anda na câmera lenta
-      var comp = w * big;                               // comprimento da palavra em pé
-      // Começa inteira fora da tela: ISOLADA abaixo do rodapé da janela,
-      // REDAÇÃO acima do topo. Entra rápido e freia no meio.
-      var yS = lado === 1 ? vh + comp / 2 + 20 : -comp / 2 - 20;
-      var y0 = meio + lado * curso / 2;                 // ISOLADA segue subindo devagar
-      var y1 = meio - lado * curso / 2;                 // REDAÇÃO segue descendo devagar
-      el.style.setProperty("--dx", (tx - rcx).toFixed(1) + "px");
-      el.style.setProperty("--dyS", (yS - rcy).toFixed(1) + "px");
-      el.style.setProperty("--dy0", (y0 - rcy).toFixed(1) + "px");
-      el.style.setProperty("--dy1", (y1 - rcy).toFixed(1) + "px");
-    });
-  }
-
-  if (hero && seam) {
-    var cs = getComputedStyle(document.documentElement);
-    var delay = parseFloat(cs.getPropertyValue("--slam-delay")) * 1000 || 250;
-    var dur = parseFloat(cs.getPropertyValue("--slam-dur")) * 1000 || 3600;
-    var IMPACTO = delay + dur * 0.88;
-
-    var comecar = function () {
-      if (hero.classList.contains("is-intro")) return;
-      if (reduced) { hero.classList.add("is-intro", "is-fused"); return; }
-      fit();
-      posicionar();
-      hero.classList.add("is-intro");
-
-      setTimeout(function () {
-        var p = centro();
-        hero.style.setProperty("--cx", p.x + "px");
-        hero.style.setProperty("--cy", p.y + "px");
-        hero.classList.add("is-impact");
-        burst(p.x, p.y);
-        spawnEmbersAt(p.vx, p.vy, 36);
-      }, IMPACTO);
-
-      setTimeout(function () { hero.classList.add("is-fused"); }, IMPACTO + 600);
-    };
-
-    // Espera a fonte (as medidas dependem dela) e o banner, com teto de 1,2s
-    // para a entrada nunca travar por conexão lenta.
-    var prontos = [];
-    if (document.fonts && document.fonts.ready) prontos.push(document.fonts.ready);
-    var foto = hero.querySelector(".hero__photo img");
-    if (foto && !foto.complete) prontos.push(new Promise(function (ok) { foto.addEventListener("load", ok); foto.addEventListener("error", ok); }));
-    if (window.Promise && prontos.length) {
-      Promise.race([Promise.all(prontos), new Promise(function (ok) { setTimeout(ok, 1200); })]).then(comecar);
-    } else {
-      comecar();
-    }
-  }
-
-
-  /* =========================================================
      SCROLL — header, barra de progresso, parallax, dock
      ========================================================= */
   var header = document.getElementById("header");
   var progress = document.getElementById("progress");
-  var heroBg = document.getElementById("heroBg");
   var dock = document.getElementById("dock");
   var ticking = false;
 
@@ -328,9 +143,6 @@
     var max = document.documentElement.scrollHeight - window.innerHeight;
     progress.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
     if (dock) dock.classList.toggle("is-on", y > window.innerHeight * 0.85);
-    if (!reduced && heroBg && y < window.innerHeight * 1.2) {
-      heroBg.style.transform = "translateY(" + (y * 0.2) + "px)";
-    }
     ticking = false;
   }
   window.addEventListener("scroll", function () {
@@ -415,8 +227,6 @@
       xp.hidden = false;
       document.body.style.overflow = "hidden";
       requestAnimationFrame(function () { xp.classList.add("is-open"); });
-      // um punhado de brasas estourando do meio da tela
-      setTimeout(function () { spawnEmbersAt(window.innerWidth / 2, window.innerHeight / 2, 40); }, 350);
       setTimeout(function () { var c = xp.querySelector(".xp__cta"); if (c) c.focus({ preventScroll: true }); }, 700);
       track("exit_popup_view", { trigger: why });
       xpCleanup.forEach(function (fn) { fn(); });
